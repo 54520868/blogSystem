@@ -400,7 +400,7 @@ layui.define(['table', 'jquery', 'element'], function (exports) {
 	        var dnsRange = document.createRange();
 	        dnsRange.selectNode(document.head);
 	        var dnsFragment = dnsRange.createContextualFragment(dns);
-	        document.head.appendChild(dnsFragment);
+	        // document.head.appendChild(dnsFragment);
 	        // google fonts dns prefetch off
 	
 	        // google fonts style on
@@ -408,7 +408,7 @@ layui.define(['table', 'jquery', 'element'], function (exports) {
 	        var fontRange = document.createRange();
 	        fontRange.selectNode(document.head);
 	        var fontFragment = fontRange.createContextualFragment(font);
-	        document.head.appendChild(fontFragment);
+	        // document.head.appendChild(fontFragment);
 	        // google fonts style off
 	    }
 	};

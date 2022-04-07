@@ -1,7 +1,11 @@
 //导入数据库
 const db = require('../DB/db.js')
 const moment = require('moment');
-const session = require('express-session');
+// const session = require('express-session');
+//导入jwt
+let jwt = require('jsonwebtoken');
+//导入验证的秘钥
+let Retail = require('../Retail.js')
 const query = require('./promises.js')
 //导入bcryptjs 密码加密包
 const bcrypt = require("bcryptjs")
@@ -87,6 +91,7 @@ exports.regLogin = (req, res) => {
 
         // 对数据进行加密传输
         const datas = { loginData }
+        let token = jwt.sign(datas,Retail.jwtSecretKey, { expiresIn: Retail.expiresIn })
         const userResult = bcrypt.compareSync(inputState, data[0].password)
         if (!userResult) {
             res.json({
@@ -105,10 +110,33 @@ exports.regLogin = (req, res) => {
             res.json({
                 code: 200,
                 message: '登录成功',
+                token: `${token}`
             })
         }
 
     })
+}
+
+//校验token权限
+exports.getInfo = (req, res) => {
+    try {
+        let { tok } = req.query;
+        let obj = jwt.verify(tok, Retail.jwtSecretKey);
+        let { loginData } = obj
+        res.json({
+            code: 200,
+            user: loginData
+        })
+    }
+    catch (err) {
+        if (err) {
+            res.json({
+                code: 401,
+                message: "验证权限失败,请重新登录"
+            })
+        }
+        return
+    }
 }
 
 

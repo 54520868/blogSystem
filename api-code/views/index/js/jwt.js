@@ -28,7 +28,7 @@ $(function () {
                             position: 'topCenter'
                         });
                         setTimeout(function () {
-                            location.href = '/login.html'
+                            location.href = '/login'
                         }, 2000)
                         return
                     } else {

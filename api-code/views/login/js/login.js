@@ -258,7 +258,7 @@ $(function () {
                                         position: 'topRight'
                                     });
                                     setTimeout(function () {
-                                        localStorage.setItem('token', data.token),
+                                        localStorage.setItem('token', data.token)
                                             location.href = '/index'
                                     }, 700)
                                 }, 0)

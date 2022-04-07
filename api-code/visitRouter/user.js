@@ -13,7 +13,8 @@ app.post('/register',user.regUser)
 app.post('/login',user.regLogin)
 //校验密码
 app.post('/verifyPass',user.verifyPass)
-
+//校验权限
+app.get('/getInfo',user.getInfo)
 
 
 //修改密码

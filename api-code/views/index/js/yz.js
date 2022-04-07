@@ -22,7 +22,7 @@ $(function () {
                     position: 'topCenter'
                 });
                 setTimeout(function () {
-                    location.href = 'login.html',
+                    top.location.href = '/login',
                         localStorage.removeItem('token')
                 }, 1500)
 

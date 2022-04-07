@@ -2,8 +2,12 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 // const session = require('express-session');
+//导入解析token的中间件
+const expressJWT = require('express-jwt')
+//导入秘钥
+const Retail = require('./Retail.js')
 const app = express();
-const post = 7100;
+const port = 7100;
 //导入数据库
 const db = require('./DB/db.js')
 //挂载渲染页面文件
@@ -49,6 +53,10 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 //     }
 // })
 
+//设置jwt的鉴权的验证规则 并且设置需要验证的路径
+// app.use(expressJWT({ secret: Retail.jwtSecretKey, algorithms: ['HS256'] }).unless({path:['/login','/login/','/error','/error/','/getInfo']}))
+
+
 
 //挂载的网页
 const aloneH = require('./visitRouter/aloneH.js')
@@ -82,9 +90,31 @@ app.use(goods)
 const cars = require('../api-code/visitRouter/cars.js')
 app.use(cars)
 
+//捕获认证失败
+// app.use(function (err, req, res, next) {
+//     console.log(err);
+//     //UnauthorizedError token错误对象
+//     console.log(err.name);
+//     if (err.name === 'UnauthorizedError') { 
+//         //返回错误页面
+//         // let errors = `
+//         //                 <script  type="text/javascript">
+//         //                     console.log('认证失败')
+//         //                     top.location.href = 'http://localhost:7100/error.html'
+//         //                 </script>
+//         //             `
+//         // res.send(errors)
+//         res.send('认证失败')
+//         return
+//     } else {
+//         next()
+//     }
+// })
 
 
 
-app.listen(post, () => {
-    console.log(`Port The port number is:${post}`);
+
+
+app.listen(port, () => {
+    console.log(`Port The port number is:${port}`);
 })
