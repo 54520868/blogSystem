@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="box">
+        <div class="content">
+            <div class="clearfix">
+                <div class="item">
+                    <a href="">
+                        <div class="img-wrapper">
+                            <img src="https://img.alicdn.com/bao/uploaded/i1/2261059285/O1CN01bLCsxK2ISa85jthDm_!!0-item_pic.jpg_200x200q90.jpg_.webp"
+                                alt="">
+                        </div>
+                        <h4>包邮日本制进口野田珐琅Pochka搪瓷双耳单柄奶锅汤锅水壶</h4>
+                    </a>
+                    <p class="info">
+                        <span class="price">
+                            <em>¥</em>
+                            <span>198</span>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script src="../index/js/jquery.min.js"></script>
+<script src="../login/js/api.js"></script>
+<script>
+    $(function () {
+        let str = '';
+        $.ajax({
+            type: "get",
+            url: '/getGoods',
+            dataType: 'json',
+            success: function (data) {
+                data.data.forEach(element => {
+                    console.log(element);
+                    str += ` <div class="item">
+                                <a href="">
+                                    <div class="img-wrapper">
+                                        <img src="${element.goodPhoto}"
+                                            alt="">
+                                    </div>
+                                    <h4>${element.title}</h4>
+                                </a>
+                                <p class="info">
+                                    <span class="price">
+                                        <em>¥</em>
+                                        <span>${element.price}</span>
+                                    </div>
+                                </p>
+                            </div>`
+                });
+                $('.clearfix').html(str)
+            }
+        })
+    })
+</script>
+
+</html>

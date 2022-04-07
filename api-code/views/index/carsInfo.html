@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>阿泽-后台管理系统</title>
+  <link rel="icon" href="image/ico.ico" type="image/ico">
+  <meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
+  <meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
+  <meta name="author" content="yinqi">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/materialdesignicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="js/jconfirm/jquery-confirm.min.css">
+  <link rel="stylesheet" href="lib/layui-v2.6.8/layui/css/layui.css">
+  <link rel="stylesheet" href="lib/pear/css/pear.css">
+  <link href="css/style.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <div class="container-fluid p-t-15">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-toolbar clearfix">
+              <div class="toolbar-btn-action">
+                <!-- <a class="btn btn-primary m-r-5" id="newInfo" href="#!"><i class="mdi mdi-plus"></i> 新增文章</a> -->
+                <button type="submit" id="myButtones" data-loading-text="处理中..." class="btn btn-primary"
+                  autocomplete="off">
+                  更新车辆数据
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="card-header">
+            <div class="card-toolbar clearfix">
+              <form class="layui-form" onsubmit="return false;" style="display:flex">
+                <div class="form-group">
+                  <label class="sr-only" for="search-user">车辆品牌</label>
+                  <input class="form-control" type="text" id="search_cars" lay-verify="required" name="search_cars"
+                    placeholder="请输入车辆名称..">
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-default" lay-submit lay-filter="formDemo">搜索</button>
+                </div>
+              </form>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>编号</th>
+                    <th>车辆名称</th>
+                    <th>品牌名称</th>
+                    <th>车辆颜色</th>
+                    <th>车辆介绍</th>
+                    <th>车辆图片</th>
+                    <th>添加车辆时间</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodys">
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <button type="button" class="btn btn-primary btn-lg" style="display:none" data-toggle="modal"
+        data-target="#myModal" id="big">
+        点击启动示例
+      </button>
+
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">查看商品大图</h4>
+            </div>
+            <div class="modal-body">
+              <img src="" alt="" id="lookBig">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <button type="button" style="display:none" id="bbtn" class="btn btn-primary btn-lg" data-toggle="modal"
+        data-target="#myModals">
+        点击启动示例
+      </button>
+
+      <div class="modal fade" id="myModals" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">编辑商品信息</h4>
+            </div>
+            <form id="newUserMessage">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label">商品名称：</label>
+                  <input type="text" class="form-control" id="goods_name" name="goods_name">
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label">商品价格：</label>
+                  <input type="text" class="form-control" id="goods_price" name="goods_price">
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label">商品库存：</label>
+                  <input type="text" class="form-control" id="goods_stock" name="goods_stock">
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label">商品状态：</label>
+                  <div class="card">
+                    <div class="bg-success">
+                    </div>
+                    <div class="card-body">
+                      当前商品状态： <span class="text-success">正常</span>
+
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="recipient-name" class="control-label">商品图片：</label>
+                    <div class="card">
+                      <div class="bg-success">
+                      </div>
+                      <div class="card-body">
+                        <img src="" id="goods_img" alt="" width="27%">
+                        <input type="file" name="file" id="file" accept="image/png,image/jpeg" style="display: none">
+                        <button class="btn btn-secondary btn-w-md" type="button" id="putImg">更改商品图片</button>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="recipient-name" class="control-label">商品介绍：</label>
+                      <textarea class="form-control" id="goods_intro" name="goods_intro" rows="3"
+                        placeholder="商品介绍.."></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="recipient-name" class="control-label">发布商品时间：</label>
+                      <input class="form-control" type="text" id="goods_date" name="goods_date" placeholder="禁用.."
+                        disabled>
+                    </div>
+                  </div>
+            </form>
+            <div class="modal-footer">
+              <button type="button" id="btnClose" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <!-- <button type="button" class="btn btn-primary" id="keep">点击保存</button> -->
+              <button type="submit" id="myButtons" data-loading-text="处理中..." class="btn btn-primary"
+                autocomplete="off">
+                点击保存
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="layer-right">
+
+  </div>
+  <script src="http://cdn.staticfile.org/moment.js/2.24.0/moment.js"></script>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script src="js/apis.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <!--消息提示-->
+  <script src="js/bootstrap-notify.min.js"></script>
+  <script type="text/javascript" src="js/lightyear.js"></script>
+  <!-- <script src="js/jwts.js"></script> -->
+  <!--对话框-->
+  <script src="js/jconfirm/jquery-confirm.min.js"></script>
+  <script src="lib/layui-v2.6.8/layui/layui.js"></script>
+  <script src="lib/pear/pear.js"></script>
+  <script type="text/javascript" src="js/carsInfo.js"></script>
+  <script type="text/javascript" src="js/main.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $('.search-bar .dropdown-menu a').click(function () {
+        var field = $(this).data('field') || '';
+        $('#search-field').val(field);
+        $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+      });
+
+    });
+  </script>
+</body>
+
+</html>

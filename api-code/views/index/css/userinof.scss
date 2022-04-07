@@ -1,0 +1,154 @@
+.container-fluid {
+    .row {
+        .card {
+            .card-header {
+                .hed-top {
+                    box-sizing: border-box;
+                    outline: none !important;
+                    .hed-tag {
+                        padding: 0;
+                        position: relative;
+                        .hed-wrap {
+                            overflow: hidden;
+                            margin-bottom: -1px;
+                            position: relative;
+                            .scroll {
+                                overflow: hidden;
+                                .is-top {
+                                    white-space: nowrap;
+                                    position: relative;
+                                    transition: transform 0.3s;
+                                    float: left;
+                                    z-index: 2;
+                                    .active {
+                                        position: absolute;
+                                        bottom: 0;
+                                        left: 0;
+                                        height: 2px;
+                                        background-color: #1890ff;
+                                        z-index: 1;
+                                        transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                                        list-style: none;
+                                        box-sizing: border-box;
+                                        outline: none !important;
+                                        background-color: #33cabb;
+                                       
+                                    }
+                                    .item {
+                                        padding: 0 20px;
+                                        height: 40px;
+                                        box-sizing: border-box;
+                                        line-height: 40px;
+                                        display: inline-block;
+                                        list-style: none;
+                                        font-size: 14px;
+                                        font-weight: 500;
+                                        color: #303133;
+                                        position: relative;
+                                        color: #626b7d;
+                                        padding-left: 0;
+                                        cursor: pointer;
+                                    }
+                                    .prich {
+                                        color: #33cabb!important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .card-body {
+                .user-info {
+                    font-family: PingFang SC, Arial, Microsoft YaHei, sans-serif;
+                    font-size: 14px;
+                    color: #626b7d;
+                    box-sizing: border-box;
+                    outline: none !important;
+                    padding: 20px;
+                    text-align: center;
+                    .el-avatar {
+                        display: inline-block;
+                        box-sizing: border-box;
+                        text-align: center;
+                        overflow: hidden;
+                        color: #fff;
+                        background: #c0c4cc;
+                        width: 40px;
+                        height: 40px;
+                        line-height: 40px;
+                        font-size: 14px;
+                        border-radius: 50%;
+                        box-sizing: border-box;
+                        outline: none !important;
+                        color: #fff;
+                        background: #c0c4cc;
+                        height: 100px;
+                        width: 100px;
+                        line-height: 100px;
+                        img {
+                            display: block;
+                            height: 100%;
+                            vertical-align: middle;
+                            cursor: pointer;
+                            object-fit: cover;
+                        }
+                    }
+                    .user-full {
+                        text-align: center;
+                        box-sizing: border-box;
+                        outline: none !important;
+                        margin-top: 15px;
+                        font-size: 24px;
+                        font-weight: 500;
+                        color: #262626;
+                    }
+                    .user-description {
+                        margin-top: 8px;
+                        color: #626b7d;
+                    }
+                    .user-follow {
+                        margin-top: 15px;
+                    }
+                    .user-list {
+                        box-sizing: border-box;
+                        outline: none !important;
+                        margin-top: 18px;
+                        line-height: 30px;
+                        text-align: left;
+                        list-style: none;
+                        li {
+                            line-height: 30px;
+                            box-sizing: border-box;
+                            outline: none !important;
+                            i {
+                                font-family: remixicon !important;
+                                font-style: normal;
+                                -webkit-font-smoothing: antialiased;
+                                box-sizing: border-box;
+                                outline: none !important;
+                                display: inline-block;
+                                font-size: 16px;
+                                text-align: center;
+                                vertical-align: -1.5px;
+                            }
+                            .wire {
+                                margin: 8px 0 28px 0;
+                                position: relative;
+                                display: block;
+                                height: 1px;
+                                width: 100%;
+                                box-sizing: border-box;
+                                outline: none !important;
+                                background-color: #dcdfe6;
+                            }
+                            h5 {
+                                margin: -20px 0 5px 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

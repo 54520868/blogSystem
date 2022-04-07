@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>表单 - 光年(Light Year Admin)后台管理系统模板</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
+    <meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
+    <meta name="author" content="yinqi">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../index/lib/layui-v2.6.8/layui/css/layui.css">
+    <link rel="stylesheet" href="../index/lib/pear/css/pear.css">
+    <link rel="stylesheet" href="css/userinof.css">
+    <style>
+        .example-icons {
+            padding: 0 20px 10px 20px;
+            -webkit-column-count: 4;
+            -moz-column-count: 4;
+            column-count: 4;
+            -webkit-column-gap: 20px;
+            -moz-column-gap: 20px;
+            column-gap: 20px;
+        }
+
+        .example-icons div {
+            line-height: 2.5em;
+        }
+
+        .example-icons div span {
+            cursor: pointer;
+            font-size: 14px;
+            text-overflow: ellipsis;
+            display: inline-block;
+            max-width: calc(100% - 90px);
+            overflow: hidden;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .example-icons div code:hover,
+        .example-icons div span:hover,
+        .example-icons div i:hover {
+            color: #33cabb;
+        }
+
+        .example-icons div code:hover {
+            border-color: #33cabb;
+        }
+
+        .example-icons div code {
+            border: 1px solid #DDD;
+            width: 46px;
+            margin-left: 2px;
+            margin-right: 4px;
+            border-radius: 4px;
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            line-height: 24px;
+            cursor: pointer;
+        }
+
+        .example-icons div i {
+            display: inline-block;
+            width: 32px;
+            height: 24px;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            line-height: 24px;
+        }
+
+        .example-icons .mdi:before {
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid p-t-15">
+
+        <div class="row">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>个人中心</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="user-info">
+                            <span class="el-avatar">
+                                <img src="images/aaa.jpg" alt="">
+                            </span>
+                            <div class="user-full">阿泽.</div>
+                            <div class="user-description">
+                                个性签名.......签名......签名......签名......签名......签名......签名......签名......签名......签名......签名.........
+                            </div>
+                            <div class="user-follow">
+                                <a href="javascript:void(0)">
+                                    <button class="btn btn-w-md btn-round btn-primary">HomePage</button>
+                                </a>
+                            </div>
+                            <ul class="user-list">
+                                <li>
+                                    <i class="mdi mdi-18px mdi-account-alert"></i>
+                                    <span>前端小白白</span>
+                                </li>
+                                <li>
+                                    <i class="mdi mdi-18px mdi-account-card-details"></i>
+                                    <span>122</span>
+                                </li>
+                                <li>
+                                    <i class="mdi mdi-18px mdi-gender-female"></i>
+                                    <span>男</span>
+                                </li>
+                                <li>
+                                    <i class="mdi mdi-18px mdi-security"></i>
+                                    <span>集团-技术部</span>
+                                </li>
+                                <li>
+                                    <i class="mdi mdi-18px mdi-map-marker-outline"></i>
+                                    <span>中国-广东-深圳</span>
+                                </li>
+                                <li>
+                                    <i class="mdi mdi-18px mdi-cloud-tags"></i>
+                                    <span>Node-Vue-Javascript</span>
+                                </li>
+                                <li>
+                                    <div class="wire"></div>
+                                    <h5>个性标签</h5>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="hed-top">
+                            <div class="hed-tag">
+                                <div class="hed-wrap">
+                                    <div class="scroll">
+                                        <div class="is-top">
+                                            <div class="active" style=" width: 56px; transform: translateX(1px);"></div>
+                                            <div class="item prich" id="item1">
+                                                基本信息
+                                            </div>
+                                            <div class="item " id="item2">
+                                                滴滴滴滴
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class="layui-form" action="" onsubmit="return false">
+                            <div class="layui-form-item">
+                              <label class="layui-form-label">账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:</label>
+                              <div class="layui-input-block">
+                                <input type="text"  autocomplete="off"  id="user" class="layui-input"  title="用户账号,禁止修改"  disabled >
+                              </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">用户昵称:</label>
+                                <div class="layui-input-block">
+                                  <input type="text" name="w5io" required  lay-verify="required"  id="userH" placeholder="请输入您的用户昵称" autocomplete="off" class="layui-input"  >
+                                </div>
+                              </div>
+                              <div class="layui-form-item">
+                                <label class="layui-form-label">当前部门:</label>
+                                <div class="layui-input-block">
+                                  <select name="sector" required  lay-verify="required" lay-search>
+                                    <option value=""></option>
+                                    <option value="0">营销部</option>
+                                    <option value="1">技术部</option>
+                                    <option value="2">人事部</option>
+                                    <option value="3">财务部</option>
+                                    <option value="4">管理部</option>
+                                    <option value="5">暂无部门</option>
+                                  </select>
+                                </div>
+                              </div>
+                            <div class="layui-form">
+                                <div class="layui-form-item" id="area-picker">
+                                    <label class="layui-form-label" style="margin-right:25px" >地&nbsp;&nbsp;&nbsp;址:</label>
+                                    <div class="layui-input-inline" style="width: 200px;">
+                                        <select name="province"  required  lay-verify="required"  class="province-selector" data-value="广东省">
+                                            <option value="">请选择省</option>
+                                        </select>
+                                    </div>
+                                    <div class="layui-input-inline" style="width: 200px;">
+                                        <select name="city"  required  lay-verify="required" class="city-selector" data-value="深圳市">
+                                            <option value="">请选择市</option>
+                                        </select>
+                                    </div>
+                                    <div class="layui-input-inline" style="width: 200px;">
+                                        <select name="county"  required  lay-verify="required" class="county-selector" data-value="龙岗区">
+                                            <option value="">请选择区</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                              <label class="layui-form-label">性别:</label>
+                              <div class="layui-input-block">
+                                <select name="sex" lay-verify="required" lay-search>
+                                  <option value=""></option>
+                                  <option value="0">男</option>
+                                  <option value="1">女</option>
+                                  <option value="2">保密</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="layui-form-item layui-form-text">
+                              <label class="layui-form-label">个人简介:</label>
+                              <div class="layui-input-block">
+                                <textarea name="about" placeholder="快来写出你现在的状态吧~~~~~" class="layui-textarea"></textarea>
+                              </div>
+                            </div>
+                            <div class="layui-form-item">
+                              <div class="layui-input-block">
+                                <button class="btn btn-xm btn-primary" lay-submit lay-filter="formDemo">保存</button>
+                              </div>
+                            </div>
+                          </form>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/apis.js"></script>
+    <!-- <script type="text/javascript" src="js/jwts.js"></script> -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/main.min.js"></script>
+    <script type="text/javascript" src="../index/lib/layui-v2.6.8/layui/layui.js"></script>
+    <script type="text/javascript" src="../index/lib/pear/pear.js"></script>
+    <script type="text/javascript" src="js/plm.js"></script>
+</body>
+
+</html>

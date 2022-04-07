@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>阿泽-后台管理系统</title>
+    <link rel="icon" href="image/ico.ico" type="image/ico">
+    <meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
+    <meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
+    <meta name="author" content="yinqi">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/materialdesignicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="js/jconfirm/jquery-confirm.min.css">
+    <link rel="stylesheet" href="lib/layui-v2.6.8/layui/css/layui.css">
+    <link rel="stylesheet" href="lib/pear/css/pear.css">
+    <link href="css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid p-t-15">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-toolbar clearfix">
+                        <div class="toolbar-btn-action">
+                            <a class="btn btn-primary m-r-5" id="newInfo" href="#!"><i class="mdi mdi-plus"></i>
+                                新增车辆信息</a>
+                        </div>
+                        <!-- <button type="button" class="layui-btn" id="test1"   lay-data="{accept:'images'}">
+                            <i class="layui-icon">&#xe67c;</i>上传图片
+                          </button> -->
+                    </div>
+
+                    <div class="card-body">
+                        <div class="card-body" id="activeInfo" style="display: none">
+                            <form class="form-horizontal layui-form" action="#"  method="post" enctype="multipart/form-data"
+                                onsubmit="return false;">
+                                <div class="form-group">
+                                    <label class="col-xs-12">新增车辆信息 </label>
+                                    <div class="col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-12" for="example-text-input">汽车名称</label>
+                                    <div class="col-xs-12">
+                                        <input class="form-control"  lay-verify="required"  type="text" id="car_name" name="car_name"
+                                         placeholder="请输入汽车名称..">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label" >品牌</label>
+                                    <div class="layui-input-block">
+                                      <select name="5xyl5" lay-verify="required" lay-search id="selects" >
+                                        <option value=""></option>
+                                        <option value="1">大众</option>
+                                        <option value="2">奔驰</option>
+                                        <option value="3">宝马</option>
+                                        <option value="4">保时捷</option>
+                                        <option value="5">其他品牌</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <!-- <div class="form-group"></div> -->
+                                <div class="form-group">
+                                    <label class="col-xs-12" for="example-password-input">汽车颜色</label>
+                                    <div class="col-xs-12">
+                                        <input class="form-control"   lay-verify="required"  type="text" id="car_color"
+                                            name="car_color" placeholder="汽车颜色..">
+                                    </div>
+                                </div>
+                                <!-- <div class="form-group">
+                                    <label class="col-xs-12" for="example-password-input">商品库存</label>
+                                    <div class="col-xs-12">
+                                        <input class="form-control" type="text" id="goods_stock"
+                                            name="goods_stock" placeholder="商品库存..">
+                                    </div>
+                                </div> -->
+                                <div class="form-group">
+                                    <label class="col-xs-12" for="example-textarea-input">汽车封面</label>
+                                    <div class="col-xs-12">
+                                           
+                                            <img id='imgs' src="" alt="" width="200"  >
+                                            <input type="file" name="file" id="file" accept="image/png,image/jpeg" style="display: none" >
+                                            <button class="btn btn-secondary btn-w-md" type="button"  id="test1"   lay-data="{accept:'images'}">上传商品图片</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-12" for="example-textarea-input">汽车介绍</label>
+                                    <div class="col-xs-12">
+                                        <textarea class="form-control" id="car_intro"
+                                            name="car_intro" rows="3" placeholder="汽车介绍.."></textarea>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-primary" type="submit" id="add" lay-submit lay-filter="formDemo" >点击添加</button>
+                                        <button class="btn btn-default btn-w-md" style="margin-left:20px;" id="closeIssue" type="button">取消添加</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="layer-right">
+
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/apis.js"></script>
+    <script src="http://cdn.staticfile.org/moment.js/2.24.0/moment.js"></script>
+    <script src="lib/layui-v2.6.8/layui/layui.js"></script>
+    <script src="lib/pear/pear.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <!-- <script src="js/jwts.js"></script> -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!--消息提示-->
+    <script src="js/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="js/lightyear.js"></script>
+    <!--对话框-->
+    <script src="js/jconfirm/jquery-confirm.min.js"></script>
+    <script src="js/apis.js"></script>
+    <script type="text/javascript" src="js/addCard.js"></script>
+    <script type="text/javascript" src="js/main.min.js"></script>
+</body>
+
+</html>

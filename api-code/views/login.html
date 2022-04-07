@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azer Network Technology</title>
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_3148591_mseux59638o.css">
+    <link rel="stylesheet" href='lib/pear/css/pear.css'>
+    <link rel="stylesheet" href="css/login.css">
+    <script src="js/gVerify.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <div class="container">
+            <div class="content">
+                <div class="content-inner">
+                    <div class="login-form-wrapper">
+                        <div class="login-form-title"><span id="title">登录</span> - Azer Network And</div>
+                        <div class="login-form-sub-title">Dedicated to web creation</div>
+                        <div class="login-form-error-msg"></div>
+                        <!-- 登录表单 -->
+                        <form  class="arco-form" id="loginForm" autocomplete="off" >
+                            <div class="arco-form-item">
+                                <div class="arco-form-item-wrapper-col">
+                                    <div class="arco-form-item-content-wrapper">
+                                        <div class="arco-form-item-content">
+                                            <span class="arco-input-wrapper">
+                                                <span class="arco-input-prefix">
+                                                    <i class="iconfont icon-yonghu arco-icon"></i>
+                                                </span>
+                                                <input type="text" class="arco-input arco-input-size-medium"
+                                                    placeholder="用户名" name="loginData" id="loginData" >
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="arco-form-item-message">用户名不能为空</div>
+                                </div>
+                            </div>
+                            <div class="arco-form-item">
+                                <div class="arco-form-item-wrapper-col">
+                                    <div class="arco-form-item-content-wrapper">
+                                        <div class="arco-form-item-content">
+                                            <span class="arco-input-wrapper input-hovers">
+                                                <span class="arco-input-prefix">
+                                                    <i class="iconfont icon-mima2 arco-icon"></i>
+                                                </span>
+                                                <input type="password" class="arco-input arco-input-size-medium"
+                                                    placeholder="密码" id="inputState" name="inputState">
+                                                <span class="arco-icon-hover">
+                                                    <!-- <i class="iconfont icon-cuowuguanbiquxiao arco-icon ccc"></i> -->
+                                                    <span>x</span>
+                                                </span>
+                                                <span class="arco-input-suffix" id="eye">
+                                                    <span class="size-hover">
+                                                        <i id="eyeState" class="iconfont icon-yanjing_xianshi"></i>
+                                                        <!-- <i id="eyeState" class="iconfont icon-yanjing_xianshi bff"></i> -->
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="arco-form-item-message">用户名不能为空</div>
+                                </div>
+                            </div>
+                            <div class="arco-form-item">
+                                <div class="arco-form-item-wrapper-col" style="position: relative;" >
+                                    <div class="arco-form-item-content-wrapper" style="width:50%" >
+                                        <div class="arco-form-item-content">
+                                            <span class="arco-input-wrapper">
+                                                <input type="text" class="arco-input arco-input-size-medium"
+                                                    placeholder="验证码" id="code_input" name="code_input" maxlength="4" >
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="verifyCodeDemo">
+                                        <p id="picyzm"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="arco-space arco-space-vertical">
+                                <div class="arco-space-item" style="margin-bottom: 16px;">
+                                    <div class="login-form-password-actions">
+                                        <span class="arco-checkbox" checkbox='rememberPassword'>
+                                            <input type="checkbox" class="arco-checkbox-target">
+                                            <span class="arco-icon-hover">
+                                                <div class="arco-checkbox-icon">
+                                                    <!-- <i class="iconfont icon-kongjianxuanzhong xuanzhong hide"></i> -->
+                                                    <input type="checkbox">
+                                                </div>
+                                            </span>
+                                            <span class="arco-checkbox-label">记住密码</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="arco-space-item" style="margin-bottom: 16px;">
+                                    <button type="submit" class="arco-btn long prmary medium" id="btn">登录</button>
+                                </div>
+                                <div class="arco-space-item">
+                                    <a href="javascript:void(0)">
+                                        <button class="arco-btn long login-form-register medium" id="loginFormRegisterBtn" >注册账号</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- 注册表单 -->
+                        <form class="arco-form" id="registerForm" style="display: none">
+                            <!-- 用户名 -->
+                            <div class="arco-form-item">
+                                <div class="arco-form-item-wrapper-col">
+                                    <div class="arco-form-item-content-wrapper">
+                                        <div class="arco-form-item-content">
+                                            <span class="arco-input-wrapper">
+                                                <span class="arco-input-prefix">
+                                                    <i class="iconfont icon-yonghu arco-icon"></i>
+                                                </span>
+                                                <input type="text" class="arco-input arco-input-size-medium"
+                                                    placeholder="用户名" id="regUserName" name="regUserNames"autocomplete="off" >
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="arco-form-item-message">用户名不能为空</div>
+                                </div>
+                            </div>
+                            <!-- 密码 -->
+                            <div class="arco-form-item">
+                                <div class="arco-form-item-wrapper-col">
+                                    <div class="arco-form-item-content-wrapper">
+                                        <div class="arco-form-item-content">
+                                            <span class="arco-input-wrapper input-hovers">
+                                                <span class="arco-input-prefix">
+                                                    <i class="iconfont icon-mima2 arco-icon"></i>
+                                                </span>
+                                                <input type="password" class="arco-input arco-input-size-medium inputState1"
+                                                    placeholder="密码" id="regPassword" name="regPasswords" autocomplete="off">
+                                                <span class="arco-icon-hover">
+                                                    <!-- <i class="iconfont icon-cuowuguanbiquxiao arco-icon ccc"></i> -->
+                                                    <span>x</span>
+                                                </span>
+                                                <span class="arco-input-suffix" id="eye1">
+                                                    <span class="size-hover">
+                                                        <i id="eyeState1" class="iconfont icon-yanjing_xianshi"></i>
+                                                        <!-- <i id="eyeState" class="iconfont icon-yanjing_xianshi bff"></i> -->
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="arco-form-item-message">用户名不能为空</div>
+                                </div>
+                            </div>
+                            <!-- 重复密码 -->
+                            <div class="arco-form-item">
+                                <div class="arco-form-item-wrapper-col">
+                                    <div class="arco-form-item-content-wrapper">
+                                        <div class="arco-form-item-content">
+                                            <span class="arco-input-wrapper input-hovers">
+                                                <span class="arco-input-prefix">
+                                                    <i class="iconfont icon-mima2 arco-icon"></i>
+                                                </span>
+                                                <input type="password" class="arco-input arco-input-size-medium eyeState2"
+                                                    placeholder="重复密码" id="ConfirmPass" name="ConfirmPass"autocomplete="off" >
+                                                <span class="arco-input-suffix" id="eye2">
+                                                    <span class="size-hover">
+                                                        <i id="eyeState2" class="iconfont icon-yanjing_xianshi"></i>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="arco-form-item-message">请输入重复密码！！</div>
+                                </div>
+                            </div>
+                            <!-- 邮箱 -->
+                            <div class="arco-form-item">
+                                <div class="arco-form-item-wrapper-col">
+                                    <div class="arco-form-item-content-wrapper">
+                                        <div class="arco-form-item-content">
+                                            <span class="arco-input-wrapper input-hovers">
+                                                <span class="arco-input-prefix">
+                                                    <i class="iconfont icon-youxiang arco-icon"></i>
+                                                </span>
+                                                <input type="text" class="arco-input arco-input-size-medium"
+                                                    placeholder="邮箱" id="regEmail" name="regEmails" autocomplete="off">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="arco-form-item-message">邮箱不能为空！！</div>
+                                </div>
+                            </div>
+                            <!-- 手机号 -->
+                            <div class="arco-form-item">
+                                <div class="arco-form-item-wrapper-col">
+                                    <div class="arco-form-item-content-wrapper">
+                                        <div class="arco-form-item-content">
+                                            <span class="arco-input-wrapper input-hovers">
+                                                <span class="arco-input-prefix">
+                                                    <i class="iconfont icon-shoujihao arco-icon"></i>
+                                                </span>
+                                                <input type="text" class="arco-input arco-input-size-medium"
+                                                    placeholder="手机号" id="regIphone" name="regIphones" autocomplete="off" maxlength="11" > 
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="arco-form-item-message">手机号不能为空！！</div>
+                                </div>
+                            </div>
+                            <div class="arco-space arco-space-vertical">
+                                <div class="arco-space-item" style="margin-bottom: 16px;">
+                                    <div class="login-form-password-actions">
+                                        <span class="arco-checkbox" checkbox='rememberPassword'>
+                                        
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="arco-space-item" style="margin-bottom: 16px;">
+                                    <button type="submit" class="arco-btn long prmary medium" id="registerBtn">注册账号</button>
+                                </div>
+                                <div class="arco-space-item">
+                                    <a href="javascript:void(0)" id="loginBtn">
+                                        <button type="button" class="arco-btn long login-form-register medium">登录</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer">
+                    <footer class="arco-layout-footer footer">Azer Network Technology @阿泽
+                        <div style="margin-left: 20px;" >
+                            <a href="https://beian.miit.gov.cn/" style="color:red" target="_blank">粤ICP备2022020501号-1</a>
+                        </div>
+                        <div style="margin-left: 20px;">
+                            <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030902003328"
+                              style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img
+                                src="image/备案图标.png" style="float:left;" />
+                              <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤公网安备
+                                44030902003328号</p>
+                            </a>
+                          </div>
+                       
+                    </footer>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/jquery.js"></script>
+<script src="lib/layui-v2.6.8/layui/layui.js"></script>
+<script src="js/api.js"></script>
+<script src="lib/pear/pear.js"></script>
+<script src="js/login.js"></script>
+
+</html>

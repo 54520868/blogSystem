@@ -1,0 +1,377 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-size: 14px;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, PingFang SC, Hiragino Sans GB, noto sans, Microsoft YaHei,
+        Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+li {
+    list-style-type: none;
+}
+input,
+button {
+    border: 0;
+    outline: none;
+}
+.box {
+    box-sizing: border-box;
+    .container {
+        display: flex;
+        height: 100vh;
+        .content {
+            position: relative;
+            display: flex;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 40px;
+            .content-inner {
+                .login-form-wrapper {
+                    width: 320px;
+                    .login-form-title {
+                        font-weight: 500;
+                        font-size: 24px;
+                        line-height: 32px;
+                        color: #1d2129;
+                        // height: 32px;
+                    }
+                    .login-form-sub-title {
+                        font-size: 16px;
+                        line-height: 24px;
+                        color: #86909c;
+                    }
+                    .login-form-error-msg {
+                        height: 32px;
+                        color: rgb(245, 63, 63);
+                        line-height: 32px;
+                    }
+                    .arco-form {
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                        .arco-form-item {
+                            display: flex;
+                            align-items: flex-start;
+                            justify-content: flex-start;
+                            width: 100%;
+                            margin-bottom: 20px;
+                            display: block;
+                            align-items: flex-start;
+                            justify-content: flex-start;
+                            .arco-form-item-wrapper-col {
+                                display: flex;
+                                flex-direction: column;
+                                align-items: flex-start;
+                                width: 100%;
+                                min-height: 32px;
+                                .arco-form-item-content-wrapper {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: flex-start;
+                                    width: 100%;
+                                    .arco-form-item-content {
+                                        flex: 1;
+                                        min-height: 32px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: flex-start;
+                                        .arco-input-wrapper {
+                                            display: inline-flex;
+                                            align-items: center;
+                                            box-sizing: border-box;
+                                            width: 100%;
+                                            padding-right: 12px;
+                                            padding-left: 12px;
+                                            color: #1d2129;
+                                            font-size: 14px;
+                                            border: 1px solid transparent;
+                                            cursor: text;
+                                            transition: color 0.1s cubic-bezier(0, 0, 1, 1),
+                                                border-color 0.1s cubic-bezier(0, 0, 1, 1),
+                                                background-color 0.1s cubic-bezier(0, 0, 1, 1);
+                                            background-color: #f2f3f5;
+                                            border-color: transparent;
+                                            &:hover {
+                                                background-color: #e5e6eb;
+                                            }
+                                            .arco-input-prefix {
+                                                display: inline-flex;
+                                                align-items: center;
+                                                white-space: nowrap;
+                                                user-select: none;
+                                                padding-right: 12px;
+                                                color: #4e5969;
+                                                .arco-icon {
+                                                    display: inline-block;
+                                                    width: 1em;
+                                                    height: 1em;
+                                                    color: inherit;
+                                                    font-style: normal;
+                                                    vertical-align: -2px;
+                                                    outline: none;
+                                                    stroke: currentColor;
+                                                }
+                                            }
+                                            .arco-input {
+                                                width: 100%;
+                                                padding-right: 0;
+                                                padding-left: 0;
+                                                color: inherit;
+                                                line-height: 1.5715;
+                                                background: none;
+                                                border: none;
+                                                border-radius: 0;
+                                                outline: none;
+                                                cursor: inherit;
+                                                -webkit-appearance: none;
+                                                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                                                padding-top: 4px;
+                                                padding-bottom: 4px;
+                                                font-size: 14px;
+                                                line-height: 1.5715;
+                                            }
+                                            .arco-icon-hover {
+                                                position: relative;
+                                                display: inline-block;
+                                                cursor: pointer;
+                                                line-height: 12px;
+                                                color: #4e5969;
+                                                font-size: 12px;
+                                                visibility: hidden;
+                                                cursor: pointer;
+                                                &::before {
+                                                    position: absolute;
+                                                    display: block;
+                                                    box-sizing: border-box;
+                                                    background-color: transparent;
+                                                    border-radius: var(--border-radius-circle);
+                                                    transition: background-color 0.1s cubic-bezier(0, 0, 1, 1);
+                                                    content: "";
+                                                    top: 50%;
+                                                    left: 50%;
+                                                    width: 20px;
+                                                    height: 20px;
+                                                    transform: translate(-50%, -50%);
+                                                }
+                                                .ccc {
+                                                    position: relative;
+                                                    transition: color 0.1s cubic-bezier(0, 0, 1, 1);
+                                                }
+                                            }
+                                            .arco-input-suffix {
+                                                display: inline-flex;
+                                                align-items: center;
+                                                white-space: nowrap;
+                                                user-select: none;
+                                                padding-left: 12px;
+                                                color: #4e5969;
+                                                .size-hover {
+                                                    position: relative;
+                                                    display: inline-block;
+                                                    cursor: pointer;
+                                                    line-height: 12px;
+                                                    &::before {
+                                                        position: absolute;
+                                                        display: block;
+                                                        box-sizing: border-box;
+                                                        background-color: transparent;
+                                                        border-radius: var(--border-radius-circle);
+                                                        transition: background-color 0.1s cubic-bezier(0, 0, 1, 1);
+                                                        content: "";
+                                                        top: 50%;
+                                                        left: 50%;
+                                                        width: 20px;
+                                                        height: 20px;
+                                                        transform: translate(-50%, -50%);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        // .input-hovers {
+                                        //     &:hover {
+
+                                        //     }
+                                        // }
+                                    }
+                                }
+                                .arco-form-item-message {
+                                    min-height: 20px;
+                                    color: red;
+                                    font-size: 12px;
+                                    line-height: 20px;
+                                    display: none;
+                                }
+                                .verifyCodeDemo {
+                                    position: absolute;
+                                    top: 0;
+                                    right: 0;
+                                    #picyzm {
+                                        height: 32px;
+                                    }
+                                }
+                            }
+                        }
+                        .arco-space {
+                            display: inline-flex;
+                            .arco-space-item {
+                                .login-form-password-actions {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    .arco-checkbox {
+                                        position: relative;
+                                        display: inline-flex;
+                                        align-items: center;
+                                        box-sizing: border-box;
+                                        padding-left: 5px;
+                                        font-size: 14px;
+                                        line-height: unset;
+                                        cursor: pointer;
+                                        .arco-checkbox-target {
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            width: 0;
+                                            height: 0;
+                                            opacity: 0;
+                                        }
+                                        .arco-icon-hover {
+                                            position: relative;
+                                            display: inline-block;
+                                            cursor: pointer;
+                                            line-height: 12px;
+                                            &::before {
+                                                position: absolute;
+                                                display: block;
+                                                box-sizing: border-box;
+                                                background-color: transparent;
+                                                border-radius: var(--border-radius-circle);
+                                                transition: background-color 0.1s cubic-bezier(0, 0, 1, 1);
+                                                content: "";
+                                                top: 50%;
+                                                left: 50%;
+                                                width: 20px;
+                                                height: 20px;
+                                                transform: translate(-50%, -50%);
+                                                width: 24px;
+                                                height: 24px;
+                                            }
+                                            .arco-checkbox-icon {
+                                                position: relative;
+                                                box-sizing: border-box;
+                                                width: 14px;
+                                                height: 14px;
+                                                background-color: #fff;
+                                                border: 2px solid #e5e6eb;
+                                                border-radius: 2px;
+                                                user-select: none;
+                                                // margin-top: 3px;
+                                                &::after {
+                                                    position: absolute;
+                                                    top: 50%;
+                                                    left: 50%;
+                                                    display: block;
+                                                    width: 6px;
+                                                    height: 2px;
+                                                    background: var(--color-white);
+                                                    border-radius: 0.5px;
+                                                    transform: translate(-50%) translateY(-50%) scale(0);
+                                                    content: "";
+                                                }
+                                                &:hover {
+                                                    border-color: #c9cdd4;
+                                                    transition: border-color 0.1s cubic-bezier(0, 0, 1, 1),
+                                                        transform 0.3s cubic-bezier(0.3, 1.3, 0.3, 1);
+                                                }
+                                                .hide {
+                                                    display: none;
+                                                }
+                                                .xuanzhong {
+                                                    color: #165dff;
+                                                }
+                                            }
+                                        }
+                                        .arco-checkbox-label {
+                                            margin-left: 8px;
+                                            color: #1d2129;
+                                        }
+                                    }
+                                }
+                                .arco-btn {
+                                    position: relative;
+                                    display: inline-block;
+                                    box-sizing: border-box;
+                                    font-weight: 400;
+                                    line-height: 1.5715;
+                                    white-space: nowrap;
+                                    outline: none;
+                                    cursor: pointer;
+                                    transition: all 0.1s cubic-bezier(0, 0, 1, 1);
+                                    -webkit-appearance: none;
+                                    user-select: none;
+                                }
+                                .long {
+                                    display: block;
+                                    width: 100%;
+                                }
+                                .prmary {
+                                    color: #fff;
+                                    background-color: rgb(22, 93, 255);
+                                    border: 1px solid transparent;
+                                    &:hover {
+                                        color: #fff;
+                                        background-color: rgb(64, 128, 255);
+                                        border-color: transparent;
+                                    }
+                                }
+                                .medium {
+                                    height: 32px;
+                                    padding: 0 15px;
+                                    font-size: 14px;
+                                    border-radius: 2px;
+                                }
+                                a {
+                                    text-decoration: none;
+                                    .login-form-register {
+                                        background-color: transparent;
+                                        border: 1px solid transparent;
+                                        color: #86909c;
+                                        &:hover {
+                                            background-color: #f2f3f5;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .arco-space-vertical {
+                            flex-direction: column;
+                        }
+                    }
+                }
+            }
+            .footer {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                .arco-layout-footer {
+                    flex: 0 0 auto;
+                    margin: 0;
+                }
+                .footer {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 40px;
+                    color: #4e5969;
+                    text-align: center;
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
