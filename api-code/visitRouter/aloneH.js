@@ -11,17 +11,11 @@ app.get('/index', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/index.html'))
 })
 
-// //退出登录
-// app.get('/quitLogin', (req, res) => {
-//     //清除登录信息
-//     req.session.destroy(function (err) {
-//         if (err) {
-//             throw err;
-//         }
-//     })
-//     //打回登录页
-//     res.redirect('/login')
-// })
+//挂载博客首页前台
+app.get('/blogIndex', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/blogIndex/blogIndex.html'))
+})
+
 
 //挂载错误的页面
 app.get('/error', (req, res) => {

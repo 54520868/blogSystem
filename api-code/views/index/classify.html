@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>阿泽-后台管理系统</title>
+    <link rel="icon" href="images/ico.ico" type="image/ico">
+    <meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
+    <meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
+    <meta name="author" content="yinqi">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/materialdesignicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="js/jconfirm/jquery-confirm.min.css">
+    <link rel="stylesheet" href="lib/pear/css/pear.css">
+    <link href="css/style.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container-fluid p-t-15">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <div class="title">分类管理</div>
+                        </div>
+                    </div>
+                    <div class="card-toolbar clearfix">
+                        <div class="toolbar-btn-action">
+                            <!-- <a class="btn btn-primary m-r-5" id="newInfo" href="#!"><i class="mdi mdi-plus"></i> 新增文章</a> -->
+                            <button type="submit" id="myButtones" data-loading-text="处理中..." class="btn btn-primary"
+                                autocomplete="off">
+                                新增分类
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div class="card-body">
+                        <table class="layui-hide" id="test" lay-filter="test"></table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+    <script src="http://cdn.staticfile.org/moment.js/2.24.0/moment.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/apis.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script src="js/jwts.js"></script>
+    <!--消息提示-->
+    <script src="js/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="js/lightyear.js"></script>
+    <!--对话框-->
+    <script src="js/jconfirm/jquery-confirm.min.js"></script>
+    <script src="lib/layui-v2.6.8/layui/layui.js"></script>
+    <script src="lib/pear/pear.js"></script>
+    <script type="text/javascript" src="js/classify.js "></script>
+    <script type="text/javascript" src="js/main.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.search-bar .dropdown-menu a').click(function () {
+                var field = $(this).data('field') || '';
+                $('#search-field').val(field);
+                $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+            });
+
+        });
+    </script>
+
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+
+    <script>    
+        layui.use(['table', 'util'], function () {
+            var table = layui.table
+                , util = layui.util;
+            table.render({
+                elem: '#test'
+                , url: '/getAllClassify'
+                , cols: [[
+                    { type: 'checkbox', fixed: 'left' }
+                    , { field: 'cl_id', title: '编号', width: 100, fixed: 'left', sort: true }
+                    , { field: 'cl_name', title: '分类名称', width: 180, edit: 'text' }
+                    , { field: 'cl_Notes', title: '分类备注', width: 180, edit: 'text', }
+                    , { field: 'cl_addTime', title: '添加分类时间', width: 180 }
+                    , { fixed: 'right', title: '操作', toolbar: '#barDemo', width: 150 }
+                ]]
+                , page: false
+            });
+
+            //监听单元格编辑
+            table.on('edit(test)', function (obj) {
+                var value = obj.value //得到修改后的值
+                    , data = obj.data //得到所在行所有键值
+                    , field = obj.field; //得到字段
+                $.ajax({
+                    url: '/updateClassify',
+                    type: 'post',
+                    data: {
+                        cl_id: data.cl_id,
+                        cl_name: data.cl_name,
+                        cl_Notes: data.cl_Notes,
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        if (data.message === 404) {
+                            layer.msg('更新失败');
+                        } else {
+                            layer.msg('更新成功');
+                        }
+                    }
+                })
+            });
+
+
+            //监听行工具事件
+            table.on('tool(test)', function (obj) {
+                var data = obj.data;
+                //console.log(obj)
+                if (obj.event === 'del') {
+                    layer.confirm('真的删除行么', function (index) {
+                        obj.del();
+                        layer.close(index);
+                    });
+                } else if (obj.event === 'edit') {
+                    layer.prompt({
+                        formType: 2
+                        , value: data.email
+                    }, function (value, index) {
+                        obj.update({
+                            email: value
+                        });
+                        layer.close(index);
+                    });
+                }
+            });
+
+        });
+    </script>
+</body>
+
+</html>

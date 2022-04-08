@@ -20,6 +20,7 @@ app.use('/router', express.static('router'))
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
+
 // // session配置项
 // const sessionInitialize = {
 //     name: "session_name", //session的名称 
@@ -57,7 +58,6 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 // app.use(expressJWT({ secret: Retail.jwtSecretKey, algorithms: ['HS256'] }).unless({path:['/login','/login/','/error','/error/','/getInfo']}))
 
 
-
 //挂载的网页
 const aloneH = require('./visitRouter/aloneH.js')
 //单独给模块设置请求头 使其与内部相隔离
@@ -69,7 +69,6 @@ const eidv = require('./visitRouter/eidv.js')
 //单独给模块设置请求头 使其与内部相隔离
 app.use('/index', eidv)
 
-
 //导入用户模块
 const user = require('../api-code/visitRouter/user.js')
 app.use(user)
@@ -78,17 +77,11 @@ app.use(user)
 const active = require('../api-code/visitRouter/avtive.js')
 app.use(active)
 
+
 //导入用户信息处理模块
 const users = require('../api-code/visitRouter/userinfo.js')
 app.use(users)
 
-//导入商品处理模块
-const goods = require('../api-code/visitRouter/goods.js')
-app.use(goods)
-
-//导入汽车信息管理模块
-const cars = require('../api-code/visitRouter/cars.js')
-app.use(cars)
 
 //捕获认证失败
 // app.use(function (err, req, res, next) {
@@ -102,18 +95,14 @@ app.use(cars)
 //         //                     console.log('认证失败')
 //         //                     top.location.href = 'http://localhost:7100/error.html'
 //         //                 </script>
-//         //             `
+//         //             `                         
 //         // res.send(errors)
 //         res.send('认证失败')
 //         return
 //     } else {
 //         next()
 //     }
-// })
-
-
-
-
+// }
 
 app.listen(port, () => {
     console.log(`Port The port number is:${port}`);

@@ -13,35 +13,23 @@ app.get('/userInfo', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/index/userInfo.html'))
 })
 
-//挂载用户信息的页面
-app.get('/addCard', (req, res) => {
-    res.sendFile(path.join(__dirname, '../views/index/addCard.html'))
-})
 
 //挂载文章信息的页面
 app.get('/AddTheArticle', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/index/AddTheArticle.html'))
 })
 
-//挂载车辆信息的页面
-app.get('/carsInfo', (req, res) => {
-    res.sendFile(path.join(__dirname, '../views/index/carsInfo.html'))
-})
 
 //挂载修改密码的页面
 app.get('/ChangePsd', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/index/ChangePsd.html'))
 })
 
-//挂载商品信息的页面
-app.get('/goodsInfo', (req, res) => {
-    res.sendFile(path.join(__dirname, '../views/index/goodsInfo.html'))
+//挂载文章分类的页面
+app.get('/classify', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/index/classify.html'))
 })
 
-//挂载新增商品的页面
-app.get('/newGoods', (req, res) => {
-    res.sendFile(path.join(__dirname, '../views/index/newGoods.html'))
-})
 
 //挂载个人信息的页面
 app.get('/PIM', (req, res) => {

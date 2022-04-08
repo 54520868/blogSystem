@@ -16,5 +16,9 @@ app.post('/getActiveOne',active.getOneDate)
 app.post('/putData',active.regPutActive)
 //挂载获取所有文章的路由函数
 app.get('/gainActive',active.getNewActive)
+//获取所有分类
+app.get('/getAllClassify',active.getAllClassify)
+//更改分类的数据
+app.post('/updateClassify',active.updateClassify)
 
 module.exports = app;

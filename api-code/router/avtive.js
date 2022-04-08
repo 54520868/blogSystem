@@ -84,3 +84,34 @@ exports.regPutActive = (req, res) => {
         })
     })  
 }
+
+//获取所有分类数据
+exports.getAllClassify = (req, res) => {
+    const sql = `select * from classify where cl_isDel != 1`
+    db.query(sql, (err, data) => {
+        if (err) return res.json({
+            code: 404,
+            message: '获取分类数据失败'
+        })
+        res.json({
+            code: 0,
+            data
+        })
+    })
+}
+
+//更改分类的数据
+exports.updateClassify = (req, res) => {
+    let { cl_id, cl_name ,cl_Notes} = req.body;
+    const sql = `update classify set cl_name='${cl_name}',cl_Notes = '${cl_Notes}' where cl_id=${cl_id}`;
+    db.query(sql, (err, data) => {
+        if (err) return res.json({
+            code: 404,
+            message: '更新分类失败'
+        })
+        res.json({
+            code: 200,
+            message: '更新分类成功'
+        })
+    })
+}
