@@ -2377,7 +2377,7 @@ a cite {
 	display: none;
 	position: absolute;
 	left: 0;
-	top: 42px;
+	top: 60px;
 	padding: 5px 0;
 	z-index: 899;
 	min-width: 100%;
@@ -2593,7 +2593,7 @@ a cite {
 
 .layui-form-switch {
 	position: relative;
-	height: 22px;
+	height: 24px;
 	line-height: 22px;
 	min-width: 35px;
 	padding: 0 5px;
@@ -2631,8 +2631,8 @@ a cite {
 }
 
 .layui-form-onswitch {
-	border-color: #5FB878;
-	background-color: #5FB878
+	border-color: #33cabb;
+	background-color: #33cabb
 }
 
 .layui-checkbox-disabled,.layui-checkbox-disabled i {

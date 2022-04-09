@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>网站配置 - 光年(Light Year Admin)后台管理系统模板</title>
+  <link rel="icon" href="favicon.ico" type="image/ico">
+  <meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
+  <meta name="description" content="LightYear是一个基于Bootstrap v3.3.7的后台管理系统的HTML模板。">
+  <meta name="author" content="yinqi">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/materialdesignicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="js/jconfirm/jquery-confirm.min.css">
+  <link rel="stylesheet" href="lib/layui-v2.6.8/layui/css/layui.css">
+  <link rel="stylesheet" href="lib/pear/css/pear.css">
+  <link href="css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container-fluid p-t-15">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <ul class="nav nav-tabs page-tabs">
+            <li class="active"> <a href="#!">基本</a> </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active">
+              <form class="layui-form"  onsubmit="return false"  method="post"  name="edit-form" class="edit-form"  lay-filter="example">
+                <div class="form-group">
+                  <label for="web_site_title">后台标题</label>
+                  <input class="form-control" type="text" id="web_site_title" name="web_site_title"
+                    placeholder="请输入后台标题">
+                </div>
+                <div class="layui-form-item">
+                  <label class="btn-block" for="web_site_status">博客首页站点开关</label>
+                  <div class="layui-input-block" style="margin-left:0" >
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
+                      lay-text="ON|OFF">
+                  </div>
+                </div>
+                <small class="help-block">站点关闭后博客首页将不能访问，后台可正常登录</small>
+                <div class="layui-form-item">
+                  <div class="layui-input-block"  style="margin-left:0"  >
+                    <button type="submit" class="btn btn-primary m-r-5" lay-submit="" lay-filter="demo1" id="aev" >立即提交</button>
+                  </div>
+                </div>
+              </form>
+
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="layer-right">
+
+  </div>
+
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/main.min.js"></script>
+  <!--消息提示-->
+  <script src="js/bootstrap-notify.min.js"></script>
+  <script type="text/javascript" src="js/lightyear.js"></script>
+  <script src="js/jwts.js"></script>
+  <!--对话框-->
+  <script src="js/jconfirm/jquery-confirm.min.js"></script>
+  <script src="lib/layui-v2.6.8/layui/layui.js"></script>
+  <script src="lib/pear/pear.js"></script>
+  <script src="js/systemComfig.js"></script>
+</body>
+
+</html>

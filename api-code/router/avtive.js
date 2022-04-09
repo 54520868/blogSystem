@@ -115,3 +115,35 @@ exports.updateClassify = (req, res) => {
         })
     })
 }
+
+//删除分类
+exports.deleteClassify = (req, res) => {
+    let { id } = req.body;
+    const sql = `update classify set cl_isDel = 1 where cl_id=${id}`;
+    db.query(sql, (err, data) => {
+        if (err) return res.json({
+            code: 404,
+            message: '删除分类失败'
+        })
+        res.json({
+            code: 200,
+            message: '删除分类成功'
+        })
+    })
+}
+
+//添加分类
+exports.addClassify = (req, res) => {
+    let { cl_name ,cl_Notes} = req.body;
+    const sql = `insert into classify (cl_name,cl_Notes,cl_addTime) values ('${cl_name}','${cl_Notes}','${minte}')`;
+    db.query(sql, (err, data) => {
+        if (err) return res.json({
+            code: 404,
+            message: '添加分类失败'
+        })
+        res.json({
+            code: 200,
+            message: '添加分类成功'
+        })
+    })
+}

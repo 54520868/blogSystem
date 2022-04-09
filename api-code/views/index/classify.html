@@ -36,17 +36,51 @@
                                 新增分类
                             </button>
                         </div>
-
                     </div>
-
                     <div class="card-body">
                         <table class="layui-hide" id="test" lay-filter="test"></table>
                     </div>
                 </div>
             </div>
-
-
         </div>
+
+        <button type="button" style="display:none" id="bbtn" class="btn btn-primary btn-lg" data-toggle="modal"
+            data-target="#myModal">
+            点击启动示例
+        </button>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">新增分类</h4>
+                    </div>
+                    <form id="newUserMessage">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">分类名称：</label>
+                                <input type="text" class="form-control" id="cl_name" name="cl_name">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">分类备注：</label>
+                                <input type="text" class="form-control" id="cl_Notes" name="cl_Notes">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal-footer">
+                        <button type="button" id="btnClose" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" id="myButtons" data-loading-text="处理中..." class="btn btn-primary"
+                            autocomplete="off">
+                            确定
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
     </div>
 
@@ -83,7 +117,7 @@
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
 
-    <script>    
+    <script>
         layui.use(['table', 'util'], function () {
             var table = layui.table
                 , util = layui.util;
@@ -129,21 +163,33 @@
             //监听行工具事件
             table.on('tool(test)', function (obj) {
                 var data = obj.data;
-                //console.log(obj)
                 if (obj.event === 'del') {
-                    layer.confirm('真的删除行么', function (index) {
-                        obj.del();
-                        layer.close(index);
-                    });
-                } else if (obj.event === 'edit') {
-                    layer.prompt({
-                        formType: 2
-                        , value: data.email
-                    }, function (value, index) {
-                        obj.update({
-                            email: value
-                        });
-                        layer.close(index);
+                    layer.confirm('是否删除该分类', {
+                        btn: ['是的', '取消',] //可以无限个按钮
+                    }, function (index, layero) {
+                        //按钮【按钮一】的回调
+                        //拿到id
+                        let id = data.cl_id;
+                        $.ajax({
+                            type: 'POST',
+                            url: '/deleteClassify',
+                            data: {
+                                id: id,
+                            },
+                            success: data => {
+                                if (data.code === 404) {
+                                    layer.msg('删除失败');
+                                } else {
+                                    layer.msg('删除成功');
+                                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                }
+                            }
+                        })
+
+                        setTimeout(function () {
+                            $('.layui-layer-btn1').click()
+                        }, 0)
+                    }, function (index) {
                     });
                 }
             });

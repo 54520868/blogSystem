@@ -12,8 +12,73 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/materialdesignicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="js/jconfirm/jquery-confirm.min.css">
+    <link rel="stylesheet" href="lib/layui-v2.6.8/layui/css/layui.css">
     <link rel="stylesheet" href="lib/pear/css/pear.css">
     <link href="css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/userinof.css">
+    <style>
+        .example-icons {
+            padding: 0 20px 10px 20px;
+            -webkit-column-count: 4;
+            -moz-column-count: 4;
+            column-count: 4;
+            -webkit-column-gap: 20px;
+            -moz-column-gap: 20px;
+            column-gap: 20px;
+        }
+
+        .example-icons div {
+            line-height: 2.5em;
+        }
+
+        .example-icons div span {
+            cursor: pointer;
+            font-size: 14px;
+            text-overflow: ellipsis;
+            display: inline-block;
+            max-width: calc(100% - 90px);
+            overflow: hidden;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .example-icons div code:hover,
+        .example-icons div span:hover,
+        .example-icons div i:hover {
+            color: #33cabb;
+        }
+
+        .example-icons div code:hover {
+            border-color: #33cabb;
+        }
+
+        .example-icons div code {
+            border: 1px solid #DDD;
+            width: 46px;
+            margin-left: 2px;
+            margin-right: 4px;
+            border-radius: 4px;
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            line-height: 24px;
+            cursor: pointer;
+        }
+
+        .example-icons div i {
+            display: inline-block;
+            width: 32px;
+            height: 24px;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            line-height: 24px;
+        }
+
+        .example-icons .mdi:before {
+            font-size: 24px;
+        }
+    </style>
 </head>
 
 <body>
@@ -31,8 +96,8 @@
 
                     <div class="card-body">
                         <div class="card-body" id="activeInfo" style="display: none">
-                            <form class="form-horizontal" action="#"  method="post" enctype="multipart/form-data"
-                                onsubmit="return false;">
+                            <form class="form-horizontal" action="#" method="post"
+                                enctype="multipart/form-data" onsubmit="return false;">
                                 <div class="form-group">
                                     <label class="col-xs-12">发布新文章</label>
                                     <div class="col-xs-12">
@@ -42,27 +107,44 @@
                                     <label class="col-xs-12" for="example-text-input">标题</label>
                                     <div class="col-xs-12">
                                         <input class="form-control" type="text" id="active_title" name="active_title"
-                                         placeholder="请输入文章标题..">
+                                            placeholder="请输入文章标题..">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-xs-12" for="example-password-input">作者</label>
                                     <div class="col-xs-12">
-                                        <input class="form-control" type="text" id="active_author"
-                                            name="active_author" placeholder="文章作者..">
+                                        <input class="form-control" type="text" id="active_author" name="active_author"
+                                            placeholder="文章作者..">
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-12" for="example-password-input">选择分类</label>
+                                    <div class="col-xs-12">
+                                        <select class="selectpicker"  >
+                                            <option>1</option>
+                                            <option >2</option>
+                                            <option ><3/option>
+                                        </select>
+                                    </div>
+
+
                                 </div>
                                 <div class="form-group">
                                     <label class="col-xs-12" for="example-textarea-input">文章内容</label>
                                     <div class="col-xs-12">
-                                        <textarea class="form-control" id="active_content"
-                                            name="active_content" rows="6" placeholder="内容.."></textarea>
+                                        <div class="layui-card-body">
+                                            <textarea name="" id="edit" cols="30" rows="10"></textarea>
+                                            <div class="layui-btn-group" style="margin-top: 10px">
+                                                <button class="layui-btn" lay-event="getContent">获取内容</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <button class="btn btn-primary" type="submit">点击发布</button>
-                                        <button class="btn btn-default btn-w-md" style="margin-left:20px;" id="closeIssue" type="button">取消发布</button>
+                                        <button class="btn btn-default btn-w-md" style="margin-left:20px;"
+                                            id="closeIssue" type="button">取消发布</button>
                                     </div>
                                 </div>
                             </form>
@@ -79,6 +161,7 @@
     <script src="http://cdn.staticfile.org/moment.js/2.24.0/moment.js"></script>
     <script src="lib/layui-v2.6.8/layui/layui.js"></script>
     <script src="lib/pear/pear.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script src="js/jwts.js"></script>

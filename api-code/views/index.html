@@ -16,7 +16,17 @@
   <link rel="stylesheet" href="js/jconfirm/jquery-confirm.min.css">
   <link rel="stylesheet" href="lib/pear/css/pear.css">
   <link href="css/style.min.css" rel="stylesheet">
+  <style>
+    #hv:hover {
+      color: inherit;
+    }
+
+    #hv #webTitle {
+      padding-left: 15px;
+    }
+  </style>
 </head>
+
 
 <body>
   <div class="lyear-layout-web">
@@ -26,7 +36,10 @@
 
         <!-- logo -->
         <div id="logo" class="sidebar-header">
-          <a href=""> <img src="images/aaa.jpg" alt="" style="width: 35px; height: 35px;border-radius:50%"> </a>
+          <a href=""  id="hv" > <img src="images/aaa.jpg" alt="" style="width: 35px; height: 35px;border-radius:50%"> 
+            <span id="webTitle"  style="color: black;" ></span>
+          </a>
+        
         </div>
         <div class="lyear-layout-sidebar-scroll">
 
@@ -40,14 +53,16 @@
                   <li> <a class="multitabs" href="/index/userInfo">用户信息</a> </li>
                   <li> <a class="multitabs" href="/index/ChangePsd">修改密码</a> </li>
                   <li> <a class="multitabs" href="/index/pim">个人信息</a> </li>
+                  <li> <a class="multitabs" href="/index/systemComfig">系统配置</a> </li>
                 </ul>
               </li>
               <li class="nav-item nav-item-has-subnav">
                 <a href="javascript:void(0)"><i class="mdi mdi-language-javascript"></i> <span>文章列表</span></a>
                 <ul class="nav nav-subnav">
-                  <li> <a class="multitabs" href="/index/lyear_pages_doc">所有文章</a> </li>
+                  <li> <a class="multitabs" href="/index/lyear_pages_doc">已审核文章</a> </li>
                   <li> <a class="multitabs" href="/index/AddTheArticle">发布文章</a> </li>
                   <li> <a class="multitabs" href="/index/classify">文章分类</a> </li>
+                  <li> <a class="multitabs" href="/index/activeAudit">文章审核中心</a> </li>
                 </ul>
               </li>
             </ul>
@@ -89,7 +104,7 @@
               <li class="dropdown dropdown-profile">
                 <a href="javascript:void(0)" data-toggle="dropdown">
                   <img class="img-avatar img-avatar-48 m-r-10" src="images/aaa.jpg" />
-                  <span>阿泽 <span class="caret"></span></span>
+                  <span id="idUserl"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li> <a class="multitabs" data-url="pim" href="javascript:void(0)"><i

@@ -15,8 +15,10 @@ app.post('/login',user.regLogin)
 app.post('/verifyPass',user.verifyPass)
 //校验权限
 app.get('/getInfo',user.getInfo)
-
-
+//网站配置
+app.get('/getWebConfig',user.getWebConfig)
+//更新网站配置
+app.post('/updataWebConfig',user.updataWebConfig)
 //修改密码
 app.post('/updataPass',user.updataPass)
 module.exports = app;

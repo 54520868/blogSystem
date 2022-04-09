@@ -60,10 +60,10 @@ exports.regLogin = (req, res) => {
     const sql = `select * from aaaaa where username='${loginData}'`;
     db.query(sql, (err, data) => {
         var [is_state] = data;
-        if(is_state) {
+        if (is_state) {
             var { is_state } = is_state
         }
-       
+
         //报错则直接终止
         if (err) {
             res.json({
@@ -91,7 +91,7 @@ exports.regLogin = (req, res) => {
 
         // 对数据进行加密传输
         const datas = { loginData }
-        let token = jwt.sign(datas,Retail.jwtSecretKey, { expiresIn: Retail.expiresIn })
+        let token = jwt.sign(datas, Retail.jwtSecretKey, { expiresIn: Retail.expiresIn })
         const userResult = bcrypt.compareSync(inputState, data[0].password)
         if (!userResult) {
             res.json({
@@ -150,12 +150,12 @@ exports.verifyPass = async (req, res) => {
             let pass = datas.password
             if (data.length > 0) {
                 const userResult = bcrypt.compareSync(oldVal, pass)
-                if(!userResult) {
+                if (!userResult) {
                     return res.json({
                         code: 400,
                         message: '验证旧密码失败,请重新输入'
                     })
-                }else {
+                } else {
                     return res.json({
                         code: 200,
                         message: '恭喜您,验证成功'
@@ -173,42 +173,99 @@ exports.verifyPass = async (req, res) => {
     } else {
         //没找到则直接结束当前任务，返回错误
         return res.json({
-            code: 404,  
+            code: 404,
             message: "验证失败,请稍后在试或重新登录"
         })
     }
 }
 
 //修改密码
-exports.updataPass = async  (req, res) => {
-    let {passVal,user} = req.body;
+exports.updataPass = async (req, res) => {
+    let { passVal, user } = req.body;
     if (user) {
         //对密码进行加密
         let brypt = bcrypt.hashSync(passVal, 15).toString()
         //更新数据
         const sql = `update aaaaa set password='${brypt}' where username='${user}'`
         await query(sql).then(data => {
-            if(data.affectedRows) {
+            if (data.affectedRows) {
                 return res.json({
-                    code: 200,  
+                    code: 200,
                     message: "修改密码成功"
                 })
             } else {
-                
+
                 return res.json({
-                    code: 401,  
+                    code: 401,
                     message: "网络繁忙,修改密码失败,请稍后在试"
                 })
             }
-        }).catch(err=> {
+        }).catch(err => {
             console.log(err);
         })
-        
+
     } else {
         //没找到则直接结束当前任务，返回错误
         return res.json({
-            code: 404,  
+            code: 404,
             message: "验证失败,请稍后在试或重新登录"
         })
     }
+}
+
+//查询网站配置
+exports.getWebConfig = async (req, res) => {
+    const sql = `SELECT * FROM webComfig`
+    await query(sql).then(data => {
+        if (data.length > 0) {
+            return res.json({
+                code: 200,
+                message: '获取网站配置成功',
+                data
+            })
+        } else {
+            return res.json({
+                code: 404,
+                message: '获取网站配置失败,请稍后在试'
+            })
+        }
+    }).catch(err => {
+        console.log(err);
+        return res.json({
+            code: 404,
+            message: '获取网站配置失败,请稍后在试'
+        })
+    })
+}
+
+
+//更新网站配置
+exports.updataWebConfig = (req, res) => {
+    let { web_site_title, open } = req.body;
+    let sql = ''
+    if (open) {
+        sql = `update webComfig set webTiltle='${web_site_title}',openStatus="true" where id=1`
+    } else {
+        sql = `update webComfig set webTiltle='${web_site_title}' ,openStatus="false" where id=1`
+    }
+    query(sql).then(data => {
+        if (data.affectedRows) {
+            return res.json({
+                code: 200,
+                message: '更新网站配置成功',
+                data:web_site_title
+            })
+        } else {
+            return res.json({
+                code: 404,
+                message: '更新网站配置失败,请稍后在试'
+            })
+        }
+    }).catch(err => {
+        console.log(err);
+        return res.json({
+            code: 404,
+            message: '更新网站配置失败,请稍后在试'
+        })
+    })
 }

@@ -20,5 +20,10 @@ app.get('/gainActive',active.getNewActive)
 app.get('/getAllClassify',active.getAllClassify)
 //更改分类的数据
 app.post('/updateClassify',active.updateClassify)
+//删除分类
+app.post('/deleteClassify',active.deleteClassify)
+//新增分类
+app.post('/addClassify',active.addClassify)
+
 
 module.exports = app;

@@ -19,7 +19,14 @@ app.get('/AddTheArticle', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/index/AddTheArticle.html'))
 })
 
+//文章审核中心
+app.get('/activeAudit',(req,res) => {
+    res.sendFile(path.join(__dirname, '../views/index/activeAudit.html'))
+})
 
+app.get('/systemComfig', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/index/systemComfig.html'))
+})
 //挂载修改密码的页面
 app.get('/ChangePsd', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/index/ChangePsd.html'))
