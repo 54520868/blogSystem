@@ -1,5 +1,7 @@
 const db = require('../DB/db.js')
 const moment = require('moment');
+const multer = require('multer')
+const upload = multer({ dest: 'router/uploads/' })
 const express = require('express');
 const app = express();
 
@@ -24,6 +26,10 @@ app.post('/updateClassify',active.updateClassify)
 app.post('/deleteClassify',active.deleteClassify)
 //新增分类
 app.post('/addClassify',active.addClassify)
+//新增文章信息
+app.post('/newPhoto',upload.single('file'),active.newPhoto)
 
+//
+app.post('/addActives',active.addActive)
 
 module.exports = app;
