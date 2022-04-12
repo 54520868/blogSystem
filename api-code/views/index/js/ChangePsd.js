@@ -1,5 +1,5 @@
 $(function () {
-    let user = localStorage.getItem('user');
+    let user = JSON.parse(localStorage.getItem('userComfig')).username
     let reg = /^(?=.*[a-z])(?=.*[0-9]).{8,}$/
     //加载弹窗组件
     var toast;  
@@ -168,7 +168,7 @@ $(function () {
         });
 
         $('#rtIndex').click(function () {
-            top.location.href = '/index.html';
+            top.location.href = '/index';
         });
         
     });

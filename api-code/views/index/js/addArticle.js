@@ -149,13 +149,8 @@ $(function () {
                     }
                 }
             })
-
-
-
             return false;
         });
-
-
     });
     $('#newInfo').click(function () {
         $('#activeInfo').show();
@@ -163,48 +158,4 @@ $(function () {
     $('#closeIssue').click(function () {
         $('#activeInfo').hide();
     })
-
-
-
-
-    // $('.form-horizontal').on('submit', function () {
-    //     if ($('#active_title').val() == '' || $('#active_author').val() == '' || $('#active_content').val() == '') {
-    //         err('失败', "请填写信息之后在进行提交")
-    //         return false
-    //     }
-
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: '/addActive',
-    //         dataType: 'json',
-    //         data: $(this).serialize(),
-    //         success: (data) => {
-    //             switch (data.code) {
-    //                 case 404: {
-    //                     toast.success({
-    //                         title: '失败',
-    //                         message: data.message,
-    //                         position: 'topRight'
-    //                     });
-    //                 }
-    //                     break;
-    //                 case 200: {
-    //                     toast.success({
-    //                         title: '成功',
-    //                         message: data.message,
-    //                         position: 'topRight'
-    //                     });
-    //                     setTimeout(() => {
-    //                         $('#closeIssue').click();
-    //                     }, 1500)
-    //                 }
-    //                     break;
-    //             }
-    //         }
-    //     })
-    // })
-
-
-
-
 })

@@ -8,8 +8,6 @@ const app = express();
 //导入文章模块
 const active = require("../router/avtive.js")
 
-//挂载处理文章的路由函数
-app.post('/addActive',active.regAddActive)
 //挂载删除文章的路由函数
 app.post('/deleteAvtive',active.regDeActive)
 //挂载获取单条文章数据的路由函数
@@ -28,8 +26,12 @@ app.post('/deleteClassify',active.deleteClassify)
 app.post('/addClassify',active.addClassify)
 //新增文章信息
 app.post('/newPhoto',upload.single('file'),active.newPhoto)
+//获取................................
+app.get('/getAllCount',active.getAllCount)
 
-//
+//添加文章
 app.post('/addActives',active.addActive)
+//获取所有文章数据
+app.get('/getAllActives',active.getAllActives)
 
 module.exports = app;

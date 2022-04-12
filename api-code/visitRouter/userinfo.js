@@ -11,4 +11,13 @@ app.get('/getUserinfo',routerUserinfo.getUserinfo)
 //查询用户
 app.get('/getUser',routerUserinfo.getUser)
 
+//更新用户头像
+app.post('/updateUserPhoto',routerUserinfo.updateUserPhoto)
+
+//更新用户信息
+app.post('/updateUserinfo',routerUserinfo.updateUserinfo)
+
+//dddAh
+app.post('/getInfo',routerUserinfo.getInfo)
+
 module.exports = app

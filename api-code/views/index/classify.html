@@ -149,11 +149,12 @@
                         cl_Notes: data.cl_Notes,
                     },
                     success: function (data) {
-                        console.log(data);
-                        if (data.message === 404) {
-                            layer.msg('更新失败');
+                        if (data.code === 404) {
+                            layer.msg(data.message);
+                        } else if(data.code === 1) {
+                            layer.msg(data.message);
                         } else {
-                            layer.msg('更新成功');
+                            layer.msg(data.message);
                         }
                     }
                 })

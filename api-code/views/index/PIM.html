@@ -91,11 +91,20 @@
                     </div>
                     <div class="card-body">
                         <div class="user-info">
-                            <span class="el-avatar">
-                                <img src="images/aaa.jpg" alt="">
+                            <span class="el-avatar" id="thisPhoto" data-toggle="tooltip" data-placement="right"
+                                title="小tips:点击头像可以更换你的新头像哦"  >
+
+                                <img id="thisImg" src="images/aaa.jpg" alt="">
+                                <button class="btn btn-secondary btn-w-md" type="button"  style="display: none"  id="test1"
+                                lay-data="{accept:'images'}">上传文章封面</button>
+
+                                <input type="file" name="file" id="file" accept="image/png,image/jpeg"
+                                style="display: none">
                             </span>
-                            <div class="user-full">阿泽.</div>
-                            <div class="user-description">
+                            <div class="user-full">
+                                <span id="nikou">顶顶顶顶顶的顶顶顶顶顶</span>
+                            </div>
+                            <div class="user-description" id="instor">
                                 个性签名.......签名......签名......签名......签名......签名......签名......签名......签名......签名......签名.........
                             </div>
                             <div class="user-follow">
@@ -103,8 +112,8 @@
                                     <button class="btn btn-w-md btn-round btn-primary">HomePage</button>
                                 </a>
                             </div>
-                            <ul class="user-list">
-                                <li>
+                            <ul class="user-list" style="height:165px">
+                                <!-- <li>
                                     <i class="mdi mdi-18px mdi-account-alert"></i>
                                     <span>前端小白白</span>
                                 </li>
@@ -131,7 +140,7 @@
                                 <li>
                                     <div class="wire"></div>
                                     <h5>个性标签</h5>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
 
@@ -151,8 +160,8 @@
                                             <div class="item prich" id="item1">
                                                 基本信息
                                             </div>
-                                            <div class="item " id="item2">
-                                                滴滴滴滴
+                                            <div class="item " id="item2" style="padding:0">
+                                                板块二
                                             </div>
                                         </div>
                                     </div>
@@ -161,76 +170,60 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form class="layui-form" action="" onsubmit="return false">
+                        <form class="layui-form" action="" onsubmit="return false" lay-filter="example">
                             <div class="layui-form-item">
-                              <label class="layui-form-label">账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:</label>
-                              <div class="layui-input-block">
-                                <input type="text"  autocomplete="off"  id="user" class="layui-input"  title="用户账号,禁止修改"  disabled >
-                              </div>
+                                <label class="layui-form-label">账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:</label>
+                                <div class="layui-input-block" data-toggle="tooltip" data-placement="top"
+                                    title="用户账号,禁止修改">
+                                    <input type="text" name="names" autocomplete="off" id="user" class="layui-input"
+                                        disabled>
+                                </div>
                             </div>
                             <div class="layui-form-item">
                                 <label class="layui-form-label">用户昵称:</label>
                                 <div class="layui-input-block">
-                                  <input type="text" name="w5io" required  lay-verify="required"  id="userH" placeholder="请输入您的用户昵称" autocomplete="off" class="layui-input"  >
-                                </div>
-                              </div>
-                              <div class="layui-form-item">
-                                <label class="layui-form-label">当前部门:</label>
-                                <div class="layui-input-block">
-                                  <select name="sector" required  lay-verify="required" lay-search>
-                                    <option value=""></option>
-                                    <option value="0">营销部</option>
-                                    <option value="1">技术部</option>
-                                    <option value="2">人事部</option>
-                                    <option value="3">财务部</option>
-                                    <option value="4">管理部</option>
-                                    <option value="5">暂无部门</option>
-                                  </select>
-                                </div>
-                              </div>
-                            <div class="layui-form">
-                                <div class="layui-form-item" id="area-picker">
-                                    <label class="layui-form-label" style="margin-right:25px" >地&nbsp;&nbsp;&nbsp;址:</label>
-                                    <div class="layui-input-inline" style="width: 200px;">
-                                        <select name="province"  required  lay-verify="required"  class="province-selector" data-value="广东省">
-                                            <option value="">请选择省</option>
-                                        </select>
-                                    </div>
-                                    <div class="layui-input-inline" style="width: 200px;">
-                                        <select name="city"  required  lay-verify="required" class="city-selector" data-value="深圳市">
-                                            <option value="">请选择市</option>
-                                        </select>
-                                    </div>
-                                    <div class="layui-input-inline" style="width: 200px;">
-                                        <select name="county"  required  lay-verify="required" class="county-selector" data-value="龙岗区">
-                                            <option value="">请选择区</option>
-                                        </select>
-                                    </div>
+                                    <input type="text" name="nickname" required lay-verify="required" id="userH"
+                                        placeholder="请输入您的用户昵称" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
                             <div class="layui-form-item">
-                              <label class="layui-form-label">性别:</label>
-                              <div class="layui-input-block">
-                                <select name="sex" lay-verify="required" lay-search>
-                                  <option value=""></option>
-                                  <option value="0">男</option>
-                                  <option value="1">女</option>
-                                  <option value="2">保密</option>
-                                </select>
-                              </div>
+                                <label class="layui-form-label">邮箱:</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="email" required lay-verify="required" id="userH"
+                                        placeholder="请输入您的邮箱" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">手机号:</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="iphone" required lay-verify="required" id="userH"
+                                        placeholder="请输入您的用户手机号" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">性别:</label>
+                                <div class="layui-input-block">
+                                    <select name="sex" lay-verify="required" lay-search>
+                                        <option value=""></option>
+                                        <option value="0">男</option>
+                                        <option value="1">女</option>
+                                        <option value="2">保密</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="layui-form-item layui-form-text">
-                              <label class="layui-form-label">个人简介:</label>
-                              <div class="layui-input-block">
-                                <textarea name="about" placeholder="快来写出你现在的状态吧~~~~~" class="layui-textarea"></textarea>
-                              </div>
+                                <label class="layui-form-label">个人简介:</label>
+                                <div class="layui-input-block">
+                                    <textarea name="about" id="about" placeholder="这个人很懒，什么都没有留下"
+                                        class="layui-textarea"></textarea>
+                                </div>
                             </div>
                             <div class="layui-form-item">
-                              <div class="layui-input-block">
-                                <button class="btn btn-xm btn-primary" lay-submit lay-filter="formDemo">保存</button>
-                              </div>
+                                <div class="layui-input-block">
+                                    <button class="btn btn-xm btn-primary" lay-submit lay-filter="formDemo">保存</button>
+                                </div>
                             </div>
-                          </form>
+                        </form>
 
                     </div>
                 </div>
@@ -243,6 +236,7 @@
     </div>
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
     <script type="text/javascript" src="js/apis.js"></script>
     <script type="text/javascript" src="js/jwts.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>

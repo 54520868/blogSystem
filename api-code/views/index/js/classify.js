@@ -4,7 +4,7 @@ $(function () {
     var layer;
     var element;
     var loading;
-    layui.use(['toast', 'toast', 'jquery', 'layer', 'code', 'element', 'loading','table'], function () {
+    layui.use(['toast', 'toast', 'jquery', 'layer', 'code', 'element', 'loading', 'table'], function () {
         toast = layui.toast;
         layer = layui.layer;
         var $ = layui.jquery;
@@ -27,9 +27,9 @@ $(function () {
         }
     }
 
-   
+
     $('#myButtones').click(function () {
-         $('#bbtn').click()
+        $('#bbtn').click()
 
     })
 
@@ -37,7 +37,7 @@ $(function () {
     $('#myButtons').on('click', function () {
         if ($('#cl_name').val() == '' || $('#cl_Notes').val() == '') {
             err('失败', "请填写信息之后在进行提交")
-            return 
+            return
         }
 
         $.ajax({
@@ -48,7 +48,15 @@ $(function () {
             success: (data) => {
                 switch (data.code) {
                     case 404: {
-                        toast.success({
+                        toast.error({
+                            title: '失败',
+                            message: data.message,
+                            position: 'topRight'
+                        });
+                    }
+                        break;
+                    case 401: {
+                        toast.error({
                             title: '失败',
                             message: data.message,
                             position: 'topRight'
@@ -66,7 +74,7 @@ $(function () {
                             //重新加载数据表格
                             table.reload('test', {
                                 url: '/getAllClassify'
-                                ,where: {} //设定异步数据接口的额外参数
+                                , where: {} //设定异步数据接口的额外参数
                             });
                         }, 1000
                         )

@@ -60,7 +60,7 @@ $(function () {
                                         <td>${author}</td>
                                         <td>${content}</td>
                                         <td>${time}</td>
-                                        <td><font class="text-success">正常</font></td>
+                                        <td><font class="text-success">审核通过</font></td>
                                         <td>
                                         <div class="btn-group">
                                             <a class="btn btn-xs btn-default redact" data = ${id + 817}  href="#!" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>

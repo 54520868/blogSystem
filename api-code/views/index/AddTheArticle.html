@@ -123,52 +123,56 @@
                                     <label class="col-xs-12" for="example-password-input"
                                         style="margin-top: 30px;">文章封面：</label>
                                     <div class="col-xs-12">
-                                        <img id='imgs' src="" alt="" width="200"  >
-                                        <input type="file" name="file" id="file" accept="image/png,image/jpeg" style="display: none" >
-                                        <button class="btn btn-secondary btn-w-md" type="button"  id="test1"   lay-data="{accept:'images'}">上传文章封面</button>
-                                        </div>
+                                        <img id='imgs' src="" alt="" width="200">
+                                        <input type="file" name="file" id="file" accept="image/png,image/jpeg"
+                                            style="display: none">
+                                        <button class="btn btn-secondary btn-w-md" type="button" id="test1"
+                                            lay-data="{accept:'images'}">上传文章封面</button>
+                                    </div>
 
-                                        <!-- <a name="list-progress"> </a>
+                                    <!-- <a name="list-progress"> </a>
 
                                         <div style="margin-top: 10px;">
                                         </div> -->
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-12" for="example-password-input"
+                                        style="margin-top: 30px;">选择文章的分类</label>
+                                    <div class="col-xs-12">
+                                        <select class="selectpicker" id="selectpicker" style="display: block"
+                                            name="selx">
+                                        </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-xs-12" for="example-password-input"
-                                            style="margin-top: 30px;">选择文章的分类</label>
-                                        <div class="col-xs-12">
-                                            <select class="selectpicker" id="selectpicker" style="display: block"
-                                                name="selx">
-                                            </select>
-                                        </div>
-                                    </div>
+                                </div>
 
-                                    <!-- <div class="layui-form-item">
+                                <!-- <div class="layui-form-item">
                                     <label class="layui-form-label">开关</label>
                                     <div class="layui-input-block">
                                         <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
                                     </div>
                                 </div> -->
 
-                                    <div class="form-group">
-                                        <label class="col-xs-12" for="example-textarea-input"
-                                            style="margin-top: 30px;">文章内容</label>
-                                        <div class="col-xs-12" style="padding-left:0">
-                                            <div class="layui-card-body">
-                                                <textarea name="" id="edit" cols="30" rows="10"></textarea>
-                                                <div class="layui-btn-group" style="margin-top: 10px">
-                                                    <!-- <button class="layui-btn" lay-event="getContent">获取内容</button> -->
-                                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-12" for="example-textarea-input"
+                                        style="margin-top: 30px;">文章内容</label>
+                                    <div class="col-xs-12" style="padding-left:0">
+                                        <div class="layui-card-body">
+                                            <textarea name="" id="edit" cols="30" rows="10"></textarea>
+                                            <div class="layui-btn-group" style="margin-top: 10px">
+                                                <!-- <button class="layui-btn" lay-event="getContent">获取内容</button> -->
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="layui-form-item">
-                                        <div class="layui-input-block" style="margin-left: 0;">
-                                            <button type="submit" class="btn btn-primary m-r-5" lay-submit=""
-                                                lay-filter="demo1" id="addtgs" lay-event="getContent">立即提交</button>
-                                        </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block" style="margin-left: 0;">
+                                        <button type="submit" class="btn btn-primary m-r-5" lay-submit=""
+                                            lay-filter="demo1" id="addtgs" lay-event="getContent">立即提交</button>
+                                        <button class="btn btn-default btn-w-md" style="margin-left:20px;"
+                                            id="closeIssue" type="button">取消添加</button>
                                     </div>
+                                </div>
                             </form>
                         </div>
                     </div>

@@ -12,7 +12,7 @@ const bcrypt = require("bcryptjs")
 //格式化时间
 let minte = moment().format('YYYY-MM-DD-HH:mm:ss')
 //用户注册处理函数
-exports.regUser = (req, res) => {
+exports.regUser = async (req, res) => {
     //获取前端传回的数据
     let { regUserNames, regPasswords, ConfirmPass, regEmails, regIphones } = req.body;
     //调用 bcryptjshanh sycn加密
@@ -45,6 +45,15 @@ exports.regUser = (req, res) => {
                     console.error(err);
                     return
                 } else {
+                    //初始化用户配置
+                    const sqls = `insert into usercomfig (username,userEmail,userIPhone) values ('${regUserNames}','${regEmails}','${regIphones}');`
+                    db.query(sqls, (err, result) => {
+                        //有错误则直接执行错误
+                        if (err) {
+                            console.error(err);
+                            return
+                        }
+                    })
                     console.log(`用户注册成功`);
                 }
             })
@@ -52,13 +61,13 @@ exports.regUser = (req, res) => {
     })
 }
 //用户登录处理函数
-exports.regLogin = (req, res) => {
+exports.regLogin = async (req, res) => {
     let state;
     //获取前端传回的数据
     let { loginData, inputState } = req.body
     //查询是否有当前此用户
     const sql = `select * from aaaaa where username='${loginData}'`;
-    db.query(sql, (err, data) => {
+    db.query(sql,  async (err, data) => {
         var [is_state] = data;
         if (is_state) {
             var { is_state } = is_state
@@ -90,8 +99,8 @@ exports.regLogin = (req, res) => {
 
 
         // 对数据进行加密传输
-        const datas = { loginData }
-        let token = jwt.sign(datas, Retail.jwtSecretKey, { expiresIn: Retail.expiresIn })
+        const dataes = { loginData }
+        let token = jwt.sign(dataes, Retail.jwtSecretKey, { expiresIn: Retail.expiresIn })
         const userResult = bcrypt.compareSync(inputState, data[0].password)
         if (!userResult) {
             res.json({
@@ -106,7 +115,10 @@ exports.regLogin = (req, res) => {
             })
             return false
         } else {
-            // req.session.user = loginData;
+            // //将用户数据传回cookie 将密码置空
+            const sql  = `select * from usercomfig where username='${loginData}'`
+            let result = await query(sql)
+            res.cookie('userThisComfig', JSON.stringify(result[0]), {})
             res.json({
                 code: 200,
                 message: '登录成功',
@@ -253,7 +265,7 @@ exports.updataWebConfig = (req, res) => {
             return res.json({
                 code: 200,
                 message: '更新网站配置成功',
-                data:web_site_title
+                data: web_site_title
             })
         } else {
             return res.json({
