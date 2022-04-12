@@ -73,18 +73,30 @@ exports.regPutActive = (req, res) => {
 }
 
 //获取所有分类数据
-exports.getAllClassify = (req, res) => {
-    const sql = `select * from classify where cl_isDel != 1`
-    db.query(sql, (err, data) => {
-        if (err) return res.json({
+exports.getAllClassify = async (req, res) => {
+    let { page, limit } = req.query
+    //查询当前数据总和
+    const sql1 = `select count(cl_id) as con from classify`
+    let result1 = await query(sql1)
+    let count = result1[0].con
+    //查询当前页数据
+    let offset = (page - 1) * limit
+    const sql = `select * from classify where cl_isDel != 1 limit ${offset},${limit}`
+    try {
+        await query(sql).then(data => {
+            return res.json({
+                data,
+                count,
+                code: 0,
+                message: '分类数据获取成功'
+            })
+        })
+    } catch (err) {
+        console.log(err);
+        return res.json({
             code: 404,
-            message: '获取分类数据失败'
         })
-        res.json({
-            code: 0,
-            data
-        })
-    })
+    }
 }
 
 //更改分类的数据
@@ -231,18 +243,28 @@ exports.getAllCount = async (req, res) => {
 
 //获取所有文章数据
 exports.getAllActives = async (req, res) => {
-    const sql = `select a.*,b.cl_name from active as a inner join classify as b on a.relationActiveSort = b.cl_id;`
-    await query(sql).then(data => {
-        return res.json({
-            code: 0,
-            result: data
+    let { page, limit } = req.query
+    //查询当前数据总和
+    const sql1 = `select count(id) as con from active`
+    let result1 = await query(sql1)
+    let count = result1[0].con
+    //查询当前页数据
+    let offset = (page - 1) * limit
+    const sql = `select a.*,b.cl_name from active as  a inner join classify as b  on a.relationActiveSort = b.cl_id where is_del !=1  limit ${offset},${limit} ;`
+    try {
+        await query(sql).then(data => {
+            return res.json({
+                data,
+                count,
+                code: 0,
+                message: '文章数据获取成功'
+            })
         })
-    }
-    ).catch(err => {
+    } catch (err) {
         console.log(err);
         return res.json({
             code: 404,
             message: '文章数据获取失败'
         })
-    })
+    }
 }

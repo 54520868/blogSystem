@@ -6,7 +6,7 @@ const app = express();
 
 const routerUserinfo = require('../router/userinfo.js')
 //获取所有用户
-app.get('/getUserinfo',routerUserinfo.getUserinfo)
+app.get('/getUserinfo',routerUserinfo.getUserinfo)  
 
 //查询用户
 app.get('/getUser',routerUserinfo.getUser)

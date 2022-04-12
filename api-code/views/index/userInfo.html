@@ -58,26 +58,16 @@
 
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>编号</th>
-                    <th>用户账号</th>
-                    <th>邮箱</th>
-                    <th>手机号</th>
-                    <th>用户注册时间</th>
-                    <th>状态</th>
-                    <th>操作</th>
-                  </tr>
-                </thead>
-                <tbody id="tbodys">
-
-                </tbody>
-              </table>
+              <table class="layui-hide" id="test" lay-filter="test"></table>
             </div>
           </div>
         </div>
       </div>
+      
+      <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+      </script>
 
 
       <button type="button" style="display:none" id="bbtn" class="btn btn-primary btn-lg" data-toggle="modal"
