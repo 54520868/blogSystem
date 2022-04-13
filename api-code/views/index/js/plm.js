@@ -11,12 +11,6 @@ $(function () {
         $('#item1').removeClass('prich')
     })
 
-    if ($('[data-toggle="tooltip"]')[0]) {
-        $('[data-toggle="tooltip"]').tooltip({
-            "container": 'body',
-        });
-    }
-
 
     layui.use(['toast', 'area', 'jquery', 'layer', 'code', 'element', 'loading', 'tinymce', 'util', 'form', 'upload'], function () {
         toast = layui.toast;

@@ -5,16 +5,25 @@ $(function () {
     var element;
     var form;
     var loading;
-    layui.use(['toast', 'jquery', 'layer', 'code', 'element', 'loading', 'form', 'table', 'laytpl'], function () {
+    layui.use(['toast', 'jquery', 'layer', 'code', 'element', 'loading', 'tinymce', 'util', 'form', 'upload'], function () {
         toast = layui.toast;
         layer = layui.layer;
         var $ = layui.jquery;
         form = layui.form;
         loading = layui.loading;
         element = layui.element;
+        layui.code();
+        var tinymce = layui.tinymce
+
         var table = layui.table;
         var laytpl = layui.laytpl;
         layui.code();
+
+        var thisFile = function upPhoto(thisFile) {
+            const file = thisFile.files[0]
+            console.log(file);
+            return file
+        }
 
         function sussTip(status, mes) {
             try {
@@ -61,7 +70,7 @@ $(function () {
                 }
                 , {
                     field: 'activePhoto', title: '文章封面', templet: function (d) {
-                        var str = `<div> <img src="http://127.0.0.1:7100/router${d.activePhoto}" alt="" width="88" id="oldSrc" > </div>`;
+                        var str = `<div>  <img src="http://127.0.0.1:7100/router${d.activePhoto}" alt="" width="88" id="oldSrc" > </div>`;
                         return str;
                     }
                 }
@@ -93,6 +102,12 @@ $(function () {
         })
 
 
+        var E = window.wangEditor;
+        const editor = new E(document.getElementById('edit'))
+        editor.create()
+
+
+
         //监听行工具事件
         table.on('tool(test)', function (obj) {
             var data = obj.data;
@@ -117,6 +132,78 @@ $(function () {
                 });
             } else if (obj.event === 'edit') {
                 $('#bbtn').click()
+                //初始化分类数据
+                let str = '';
+                $.get('/getClassify').then(function (res) {
+                    let newData = res.data
+                    if (res.code == 0) {
+                        newData.forEach(element => {
+                            let id = element.cl_id
+                            let name = element.cl_name
+                            str += `
+                                    <option value="${id}">${name}</option>
+                                    `
+                        });
+                        $('#selectpicker').html(` <option value="${data.relationActiveSort}">${data.cl_name}</option>` + str)
+                        //动态添加数据之后，重新渲染下拉框
+                        form.render('select');
+                    }
+                })
+
+                $('#imgs').attr('src', `http://127.0.0.1:7100/router${data.activePhoto}`)
+
+                $('#test1').click(function () {
+                    $('#file').click()
+                })
+                editor.txt.append(data.content);
+                //给表单赋值
+                form.val("editForm", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
+                    "article_title": data.title,
+                    "article_author": data.author,
+                    "article_time": data.time,
+                    "article_issueUser": data.issueUser,
+                    "activeStatus": data.activeStatus
+                });
+
+                $('#myButtons').click(function () {
+                    const formData = new FormData($('#newUserMessage')[0]);
+                    let editContent = editor.txt.html()
+                    //追加富文本内容
+                    formData.append('content', editContent);
+                    //旧图
+                    formData.append('oldSrc', data.activePhoto);
+                    formData.append('id', data.id)
+                    $.ajax({
+                        type: 'POST',
+                        url: '/updateArtitle',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        dataType: 'json',
+                        beforeSend: () => {
+                            lightyear.loading('show');  // 显示
+                        },
+                        success: (data) => {
+                            if (data.code === 200) {
+                                setTimeout(function () {
+                                    lightyear.loading('hide');
+                                },1000)
+                                toast.success({
+                                    title: '成功',
+                                    message: data.message,
+                                    position: 'topRight'
+                                });
+                                $('#btnClose').click()
+                                table.reload('test');
+                                layer.msg('文章数据获取成功')
+                            } else {
+                                lightyear.loading('hide');
+                                err('失败', data.message);
+                            }
+                        }
+                    })
+                })
+
             }
         });
 

@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="js/jconfirm/jquery-confirm.min.css">
   <link rel="stylesheet" href="lib/layui-v2.6.8/layui/css/layui.css">
   <link rel="stylesheet" href="lib/pear/css/pear.css">
+  <link href="https://cdn.jsdelivr.net/npm/@wangeditor/editor@latest/dist/css/style.css" rel="stylesheet">
   <link href="css/style.min.css" rel="stylesheet">
 
 </head>
@@ -89,25 +90,65 @@
                   aria-hidden="true">&times;</span></button>
               <h4 class="modal-title" id="myModalLabel">编辑文章信息</h4>
             </div>
-            <form id="newUserMessage">
+            <form id="newUserMessage" class="layui-form" lay-filter="editForm">
               <div class="modal-body">
                 <div class="form-group">
-                  <label for="recipient-name" class="control-label">标题：</label>
-                  <input type="text" class="form-control" id="recipient_username" name="user_username">
+                  <label for="recipient-name" class="control-label">文章标题：</label>
+                  <input type="text" class="form-control" id="recipient_username" name="article_title">
                 </div>
                 <div class="form-group">
-                  <label for="recipient-name" class="control-label">作者：</label>
-                  <input type="text" class="form-control" id="recipient_email" name="user_email">
+                  <label for="recipient-name" class="control-label">文章作者：</label>
+                  <input type="text" class="form-control" id="recipient_email" name="article_author">
                 </div>
                 <div class="form-group">
-                  <label for="recipient-name" class="control-label">文章内容：</label>
-                  <!-- <input type="text" class="form-control" id="recipient_iphone" name="user_iphone"> -->
-                  <textarea class="form-control" id="recipient_iphone" name="user_iphone" rows="6"
-                    placeholder="内容.."></textarea>
+                  <label class="col-xs-12" for="example-textarea-input" style="margin-top: 30px;">文章内容</label>
+                  <div class="col-xs-12" style="padding-left:0">
+                    <div class="layui-card-body">
+                      <div id="toolbar-container"></div>
+                      <div id="editor-container"></div>
+                      <div id="edit"></div>
+                    </div>
+                  </div>
                 </div>
                 <div class="form-group">
-                  <label for="recipient-name" class="control-label">发布文章时间：</label>
-                  <input class="form-control" type="text" id="recipient_deta" name="user_deta" placeholder="禁用..">
+                  <label for="recipient-name" class="control-label">文章封面：</label>
+                  <div class="col-xs-12" style="padding: 20px 0px;">
+                    <img id='imgs' src="" alt="" width="200">
+                    <input type="file" name="file" id="file" accept="image/png,image/jpeg" style="display: none"
+                      onchange="upPhoto(this)">
+                    <button class="btn btn-secondary btn-w-md" type="button" id="test1"
+                      lay-data="{accept:'images'}">更新文章封面</button>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label">发布此文章时间：</label>
+                  <input type="text" class="form-control" id="recipient_email" name="article_time" disabled
+                    value="6666">
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label">文章所属分类：</label>
+                  <div class="col-xs-12" style="padding-left: 0;">
+                    <select class="selectpicker" id="selectpicker" name="article_classify" lay-search=""
+                      lay-verify="required">
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label">文章发布者：</label>
+                  <input type="text" class="form-control" id="recipient_email" name="article_issueUser" disabled
+                    value="zegege666">
+                </div>
+
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label">文章当前状态：</label>
+                  <select class="selectpicker" id="selectpickers" name="activeStatus" lay-search=""
+                    lay-verify="required">
+                    <option value="0">审核失败</option>
+                    <option value="1">审核通过</option>
+                    <option value="2">待审核</option>
+                  </select>
+                  <br>
+                  <br>
                 </div>
               </div>
             </form>
@@ -129,6 +170,7 @@
 
   </div>
   <script src="http://cdn.staticfile.org/moment.js/2.24.0/moment.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script src="js/apis.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -140,6 +182,16 @@
   <script src="js/jconfirm/jquery-confirm.min.js"></script>
   <script src="lib/layui-v2.6.8/layui/layui.js"></script>
   <script src="lib/pear/pear.js"></script>
+  <script type="text/javascript">
+    function upPhoto(obj) {
+      var file = obj.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function (e) {
+        $('#imgs').attr('src', this.result);
+      }
+    }
+  </script>
   <script type="text/javascript" src="js/activeAudit.js "></script>
   <script type="text/javascript" src="js/main.min.js"></script>
   <script type="text/javascript">

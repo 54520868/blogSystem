@@ -3,6 +3,8 @@ const db = require('../DB/db.js')
 const fs = require('fs')
 const path = require('path')
 const moment = require('moment');
+//获取formdata传输过来的数据
+const formidable = require("formidable");
 const query = require('./promises.js')
 //格式化时间
 let minte = moment().format('YYYY-MM-DD-HH:mm:ss')
@@ -84,6 +86,23 @@ exports.getAllClassify = async (req, res) => {
     }
 }
 
+//获取未分页的所有分类
+exports.getClassify = async (req, res) => {
+    const sql = `select * from classify where cl_isDel != 1`
+    let result = await query(sql)
+    if(result.length > 0) {
+        return res.json({
+            code: 0,
+            message: '获取分类成功',
+            data: result
+        })
+    }else {
+        return res.json({
+            code: 404,
+            message: '获取分类失败'
+        })
+    }
+}
 //更改分类的数据
 exports.updateClassify = (req, res) => {
     let { cl_id, cl_name, cl_Notes } = req.body;
@@ -189,9 +208,9 @@ exports.newPhoto = (req, res) => {
 
 //获取添加文章的数据
 exports.addActive = async (req, res) => {
-    let { datas, content, } = req.body
+    let { datas, content,user} = req.body
     let { active_title, active_author, file, selx } = datas
-    const sql = `insert into active (title,author,content,time,activePhoto,relationActiveSort) values('${active_title}','${active_author}','${content}','${minte}','${oldFile}',${selx})`
+    const sql = `insert into active (title,author,content,time,activePhoto,relationActiveSort,issueUser) values('${active_title}','${active_author}','${content}','${minte}','${oldFile}',${selx},'${user}')`
     let result = await query(sql)
     if (result.affectedRows) {
         return res.json({
@@ -216,7 +235,7 @@ exports.getAllActives = async (req, res) => {
     let count = result1[0].con
     //查询当前页数据
     let offset = (page - 1) * limit
-    const sql = `select a.*,b.cl_name from active as  a inner join classify as b  on a.relationActiveSort = b.cl_id where is_del !=1  limit ${offset},${limit} ;`
+    const sql = `select a.*,b.cl_name from active as  a inner join classify as b  on a.relationActiveSort = b.cl_id where is_del !=1  order by a.id desc  limit ${offset},${limit} ;`
     try {
         await query(sql).then(data => {
             return res.json({
@@ -232,5 +251,50 @@ exports.getAllActives = async (req, res) => {
             code: 404,
             message: '文章数据获取失败'
         })
+    }
+}
+
+//编辑文章
+exports.updateArtitle = async (req, res) => {
+    let {article_title,article_author,article_classify,activeStatus,content,oldSrc,id} = req.body;
+    var oldFile;
+    var sql = ''
+    let oldSrcs = oldSrc
+    if(req.file) {
+        let files = req.file
+        let oldName = files.filename
+        let newName = files.originalname
+        let str = newName.indexOf('.')
+        let sub = newName.substring(str, newName.length)
+        let newUrl = oldName + sub
+        let oldSrc = path.join(__dirname, '/uploads', oldName) //当前目录的绝对路径并查到上传的二进制文件名称
+        let newSrc = path.join(__dirname, '/uploads', newUrl) //拿到最终要上传的路径和文件的源名称
+        oldFile = '/uploads/' + newUrl
+        fs.renameSync(oldSrc, newSrc)
+        fs.unlinkSync(path.join(__dirname, oldSrcs))
+        sql = `update active set title='${article_title}',author='${article_author}',activeStatus='${activeStatus}',content='${content}',activePhoto='${oldFile}',relationActiveSort='${article_classify}' where id=${id}`
+    }else{
+        sql = `update active set title='${article_title}',author='${article_author}',activeStatus='${activeStatus}',content='${content}',relationActiveSort='${article_classify}' where id=${id}`
+    }
+
+    try{
+        let result = await query(sql)
+        if(result.affectedRows){
+            return res.json({
+                code:200,
+                message:'编辑成功'
+            })
+        }else{
+            return res.json({
+                code:404,
+                message:'编辑失败'
+            })
+        }
+    }catch(err){
+        console.log(err);
+        return res.json({
+            code:404,
+            message:'编辑失败'
+        }) 
     }
 }

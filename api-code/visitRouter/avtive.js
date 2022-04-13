@@ -15,8 +15,12 @@ app.post('/getActiveOne',active.getOneDate)
 //挂载更新文章的路由函数
 app.post('/putData',active.regPutActive)
 
-//获取所有分类
+//获取所有分类 --- 分页数据
 app.get('/getAllClassify',active.getAllClassify)
+
+//获取所有的分类 --不分页
+app.get('/getClassify',active.getClassify)
+
 //更改分类的数据
 app.post('/updateClassify',active.updateClassify)
 //删除分类
@@ -30,5 +34,7 @@ app.post('/newPhoto',upload.single('file'),active.newPhoto)
 app.post('/addActives',active.addActive)
 //获取所有文章数据
 app.get('/getAllActives',active.getAllActives)
+//编辑文章数据
+app.post('/updateArtitle',upload.single('file'),active.updateArtitle)
 
 module.exports = app;

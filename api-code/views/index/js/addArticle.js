@@ -36,7 +36,7 @@ $(function () {
         //获取所有分类
         $.ajax({
             type: 'GET',
-            url: '/getAllClassify',
+            url: '/getClassify',
             dataType: 'json',
             success: (data) => {
                 switch (data.code) {
@@ -51,7 +51,6 @@ $(function () {
                     case 0: {
                         let newData = data.data
                         let str = '';
-                        let str2 = '';
                         newData.forEach(element => {
                             let id = element.cl_id
                             let name = element.cl_name
@@ -60,6 +59,8 @@ $(function () {
                                     `
                         });
                         $('#selectpicker').html(' <option value="0">请选择你的分类</option>' + str)
+                        //动态添加数据之后，重新渲染下拉框
+                        form.render('select');
                     }
                         break;
                 }
@@ -72,7 +73,6 @@ $(function () {
             height: 400
         });
 
-        $('.layui-select-title').hide()
 
 
         var uploadInst = upload.render({
@@ -94,6 +94,8 @@ $(function () {
             }
         });
 
+
+
         //监听提交
         form.on('submit(demo1)', function (data) {
             //判断当前编辑器的内容是否为空，是的话则提示用户
@@ -102,24 +104,24 @@ $(function () {
                 return false;
             }
 
-            //判断当前是否有选择分类
-            if ($('#selectpicker').val() === '0') {
+            // // //判断当前是否有选择分类
+            if ($('.layui-select-title>input').val() === '请选择你的分类') {
                 err('失败', '请选择分类');
                 return false;
             }
-
-            //判断封面状态
-            let inpFile = document.querySelector('.layui-upload-file').files[0];
-            if (!inpFile) {
+            // //判断封面状态
+            if($('#imgs').attr('src') === '') {
                 err('失败', '请选择文章封面');
                 return false;
             }
 
             //将数据全部上传到后台
+            let userComfig = JSON.parse(localStorage.getItem('userComfig'))
             $.ajax({
                 type: 'POST',
                 url: '/addActives',
                 data: {
+                    user:userComfig.username,
                     datas: data.field,
                     content: edit.getContent()
                 },
