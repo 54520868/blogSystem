@@ -10,6 +10,7 @@
 
 .layui-table-header,
 .layui-table-header th {
+	text-align: center !important;
 	background-color: white !important;
 }
 

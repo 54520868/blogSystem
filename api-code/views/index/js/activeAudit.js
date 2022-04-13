@@ -16,6 +16,32 @@ $(function () {
         var laytpl = layui.laytpl;
         layui.code();
 
+        function sussTip(status, mes) {
+            try {
+                toast.success({
+                    title: status,
+                    message: mes,
+                    position: 'topRight'
+                });
+            }
+            catch (err) {
+            }
+        }
+
+        function errTip(status, mes) {
+
+            try {
+                toast.error({
+                    title: status,
+                    message: mes,
+                    position: 'topRight'
+                });
+            }
+            catch (err) {
+            }
+        }
+
+
         table.render({
             elem: '#test'
             , url: '/getAllActives'
@@ -65,32 +91,38 @@ $(function () {
             table.reload('test');
             layer.msg('更新文章数据成功')
         })
+
+
+        //监听行工具事件
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'del') {
+                layer.confirm('是否删除当前文章数据？', function (index) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/deleteAvtive',
+                        data: {
+                            id: data.id
+                        },
+                        success: function (res) {
+                            if (res.code == 200) {
+                                layer.close(layer.index)
+                                sussTip('成功', res.message);
+                                table.reload('test');
+                            } else {
+                                errTip('失败', res.message);
+                            }
+                        }
+                    })
+                });
+            } else if (obj.event === 'edit') {
+                $('#bbtn').click()
+            }
+        });
+
     });
 
-    function sussTip(status, mes) {
-        try {
-            toast.success({
-                title: status,
-                message: mes,
-                position: 'topRight'
-            });
-        }
-        catch (err) {
-        }
-    }
 
-    function errTip(status, mes) {
-
-        try {
-            toast.error({
-                title: status,
-                message: mes,
-                position: 'topRight'
-            });
-        }
-        catch (err) {
-        }
-    }
 
 
 

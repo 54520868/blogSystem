@@ -14,8 +14,7 @@ app.post('/deleteAvtive',active.regDeActive)
 app.post('/getActiveOne',active.getOneDate)
 //挂载更新文章的路由函数
 app.post('/putData',active.regPutActive)
-//挂载获取所有文章的路由函数
-app.get('/gainActive',active.getNewActive)
+
 //获取所有分类
 app.get('/getAllClassify',active.getAllClassify)
 //更改分类的数据
@@ -26,8 +25,6 @@ app.post('/deleteClassify',active.deleteClassify)
 app.post('/addClassify',active.addClassify)
 //新增文章信息
 app.post('/newPhoto',upload.single('file'),active.newPhoto)
-//获取................................
-app.get('/getAllCount',active.getAllCount)
 
 //添加文章
 app.post('/addActives',active.addActive)

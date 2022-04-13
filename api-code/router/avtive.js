@@ -8,25 +8,10 @@ const query = require('./promises.js')
 let minte = moment().format('YYYY-MM-DD-HH:mm:ss')
 
 
-//获取所有文章的处理函数
-exports.getNewActive = (req, res) => {
-    const sql = `select * from active`
-    db.query(sql, (err, data) => {
-        if (err) return res.json({
-            code: 404,
-            message: '获取文章数据失败'
-        })
-        res.json({
-            code: 200,
-            data
-        })
-    })
-
-}
 //删除文章的处理函数
 exports.regDeActive = (req, res) => {
     let { id } = req.body;
-    const sql = `delete from active where id=${id}`;
+    const sql = `update active set is_del = 1 where id=${id}`;
     db.query(sql, (err, data) => {
         if (err) return res.json({
             code: 404,
@@ -221,25 +206,6 @@ exports.addActive = async (req, res) => {
     }
 }
 
-//........................................................................
-exports.getAllCount = async (req, res) => {
-    const sql = `select a.*,b.cl_id  from active as a left join classify as b on a.relationActiveSort = b.cl_id`
-    // db.query(sql, (err, data) => {
-    //     if (err) return res.json({
-    //         code: 404,
-    //         message: '获取文章数量失败'
-    //     })
-    //     res.json({
-    //         code: 0,
-    //         data
-    //     })
-    // })
-    let result = await query(sql)
-    console.log(result);
-    res.json({
-        result
-    })
-}
 
 //获取所有文章数据
 exports.getAllActives = async (req, res) => {

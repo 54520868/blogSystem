@@ -191,8 +191,10 @@ exports.verifyPass = async (req, res) => {
     }
 }
 
+
 //修改密码
 exports.updataPass = async (req, res) => {
+
     let { passVal, user } = req.body;
     if (user) {
         //对密码进行加密
