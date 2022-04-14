@@ -10,10 +10,7 @@ const active = require("../router/avtive.js")
 
 //挂载删除文章的路由函数
 app.post('/deleteAvtive',active.regDeActive)
-//挂载获取单条文章数据的路由函数
-app.post('/getActiveOne',active.getOneDate)
-//挂载更新文章的路由函数
-app.post('/putData',active.regPutActive)
+
 
 //获取所有分类 --- 分页数据
 app.get('/getAllClassify',active.getAllClassify)
@@ -36,5 +33,6 @@ app.post('/addActives',active.addActive)
 app.get('/getAllActives',active.getAllActives)
 //编辑文章数据
 app.post('/updateArtitle',upload.single('file'),active.updateArtitle)
+
 
 module.exports = app;

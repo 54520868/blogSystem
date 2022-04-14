@@ -8,8 +8,6 @@ const routerUserinfo = require('../router/userinfo.js')
 //获取所有用户
 app.get('/getUserinfo',routerUserinfo.getUserinfo)  
 
-//查询用户
-app.get('/getUser',routerUserinfo.getUser)
 
 //更新用户头像
 app.post('/updateUserPhoto',routerUserinfo.updateUserPhoto)

@@ -5,14 +5,21 @@ const db = require('../DB/db.js')
 const query = require('./promises.js')
 //获取所有用户
 exports.getUserinfo = async (req, res) => {
-    let { page, limit } = req.query
+    let { page, limit ,search_user } = req.query
     //查询当前数据总和
-    const sql1 = `select count(id) as con from aaaaa`
+    let  sql1 = `select count(id) as con from aaaaa where 1`
+    if(search_user) {
+        sql1 += ` and username like '%${search_user}%'`
+    }
     let result1 = await query(sql1)
     let count = result1[0].con
     //查询当前页数据
     let offset = (page - 1) * limit
-    const sql = `select id,username,email,iphone,minte,is_state  from aaaaa  limit ${offset},${limit}`
+    let sql = `select id,username,email,iphone,minte,is_state from aaaaa where 1`
+    if(search_user) {
+        sql += ` and username like '%${search_user}%'`
+    }
+    sql += ` limit ${offset},${limit}`
     try {
         await query(sql).then(data => {
             return res.json({
@@ -30,26 +37,6 @@ exports.getUserinfo = async (req, res) => {
     }
 }
 
-//获取查询的用户
-exports.getUser = async (req, res) => {
-    let { search_user } = req.query;
-    const sql = `select id,username,email,iphone,minte,is_state from aaaaa where username like '%${search_user}%'`
-    try {
-        let datas = await query(sql)
-        if (!datas.length > 0) {
-            res.json({
-                code: 404,
-                message: '当前无此用户'
-            })
-        } else {
-            res.json(datas)
-        }
-
-    }
-    catch (err) {
-        console.log(err);
-    }
-}
 
 //更新用户头像
 exports.updateUserPhoto = async (req, res) => {

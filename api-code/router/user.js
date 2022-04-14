@@ -67,7 +67,7 @@ exports.regLogin = async (req, res) => {
     let { loginData, inputState } = req.body
     //查询是否有当前此用户
     const sql = `select * from aaaaa where username='${loginData}'`;
-    db.query(sql,  async (err, data) => {
+    db.query(sql, async (err, data) => {
         var [is_state] = data;
         if (is_state) {
             var { is_state } = is_state
@@ -116,7 +116,7 @@ exports.regLogin = async (req, res) => {
             return false
         } else {
             // //将用户数据传回cookie 将密码置空
-            const sql  = `select * from usercomfig where username='${loginData}'`
+            const sql = `select * from usercomfig where username='${loginData}'`
             let result = await query(sql)
             res.cookie('userThisComfig', JSON.stringify(result[0]), {})
             res.json({
@@ -282,4 +282,21 @@ exports.updataWebConfig = (req, res) => {
             message: '更新网站配置失败,请稍后在试'
         })
     })
+}
+
+//可视化
+exports.getVisual = async (req, res) => {
+    const sql = `select count(a.id) as count ,b.cl_name from active as a INNER JOIN classify as b on a.relationActiveSort = b.cl_id group by a.relationActiveSort ;`
+    try {
+        let result = await query(sql)
+        return res.json({
+            code: 200,
+            data: result
+        })
+    } catch (err) {
+        console.log(err);
+        return res.json({
+            code: 404,
+        })
+    }
 }

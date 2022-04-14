@@ -72,6 +72,10 @@ $(function () {
                     field: 'activePhoto', title: '文章封面', templet: function (d) {
                         var str = `<div>  <img src="http://127.0.0.1:7100/router${d.activePhoto}" alt="" width="88" id="oldSrc" > </div>`;
                         return str;
+                        // var str = ` <a class="example-image-link" href="http://127.0.0.1:7100/router${d.activePhoto}" data-lightbox="example-set" data-title="Click the right half of the image to move forward.">
+                        //                 <img class="example-image" src="http://127.0.0.1:7100/router${d.activePhoto}" alt="" width='60%' />
+                        //             </a>`
+                        // return str;
                     }
                 }
                 , { field: 'time', title: '发布文章时间', }
@@ -105,8 +109,6 @@ $(function () {
         var E = window.wangEditor;
         const editor = new E(document.getElementById('edit'))
         editor.create()
-
-
 
         //监听行工具事件
         table.on('tool(test)', function (obj) {
@@ -207,77 +209,17 @@ $(function () {
             }
         });
 
-    });
-
-
-
-
-
-    layui.use(['layer', 'form', 'area', 'element', 'code'], function () {
-        var layer = layui.layer,
-            form = layui.form,
-            area = layui.area;
-
-        layui.code();
-
-        var form = layui.form;
         form.on('submit(formDemo)', function (data) {
             let datas = JSON.stringify(data.field);
             let newDatas = JSON.parse(datas)
-            let { search_user } = newDatas
-            let str;
-            $.ajax({
-                type: 'get',
-                url: '/getUser',
-                dataType: 'json',
-                data: `search_user=${search_user}`,
-                beforeSend: () => {
-                    loading.Load(4, "");
-                    loading.loadRemove(1300);
-                },
-                success: function (data) {
-                    if (data.code === 404) {
-                        setTimeout(function () {
-                            $('#tbodys').html('')
-                            errTip('失败', data.message)
-                        }, 1500)
-                    } else {
-                        setTimeout(function () {
-                            sussTip('成功', `查询成功,共查询到${data.length}个用户`)
-                        }, 1500)
-                        data.forEach((element, index) => {
-                            let { id, username, email, iphone, minte, is_state } = element
-                            str += `
-                                        <tr>
-                                            <td>${index + 1}</td>
-                                            <td>${username}</td>
-                                            <td>${email}</td>
-                                            <td>${iphone}</td>
-                                            <td>${minte}</td>
-                                            <td><font class="text-success state" data_is=${is_state} >正常</font></td>
-                                            <td>
-                                            <div class="btn-group">
-                                                <a class="btn btn-xs btn-default redact" data = ${id + 817}  href="#!" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
-                                                <a class="btn btn-xs btn-default lookinlook" data = ${id + 817} ="#!" title="查看" data-toggle="tooltip"><i class="mdi mdi-eye"></i></a>
-                                                <a class="btn btn-xs btn-default delData" data = ${id + 817}  href="#!" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
-                                            </div>
-                                            </td>
-                                        </tr>`
-                            $('#tbodys').html(str)
-                        });
-                    }
-                    //获取用户状态
-                    $('.state').each(function (v, h) {
-                        let index = h.getAttribute('data_is')
-                        if (index == 1) {
-                            $(h).addClass('text-error').removeClass('text-success').text('封禁');
-                        }
-                    })
-
-                }
-            })
+            let { search_article_title } = newDatas
+            table.reload('test',{
+                where:{search_article_title}
+            });
             return false;
         });
+
     });
+
 
 })

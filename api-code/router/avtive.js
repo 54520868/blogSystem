@@ -26,38 +26,6 @@ exports.regDeActive = (req, res) => {
     })
 }
 
-//获取单条数据
-exports.getOneDate = (req, res) => {
-    let { id } = req.body;
-    const sql = `select * from active where id=${id};`
-    db.query(sql, (err, data) => {
-        if (err) return res.json({
-            code: 404,
-            message: '获取当前文章数据失败'
-        })
-        res.json({
-            code: 200,
-            message: '获取当前文章成功',
-            data,
-        })
-    })
-}
-
-//更新文章的处理函数
-exports.regPutActive = (req, res) => {
-    let { id, user_username, user_email, user_iphone, user_deta } = req.body;
-    const sql = `update active set title='${user_username}',author='${user_email}',content='${user_iphone}',time='${user_deta}' where id=${id}`;
-    db.query(sql, (err, data) => {
-        if (err) return res.json({
-            code: 404,
-            message: '更新文章失败'
-        })
-        res.json({
-            code: 200,
-            message: '更新文章成功'
-        })
-    })
-}
 
 //获取所有分类数据
 exports.getAllClassify = async (req, res) => {
@@ -90,13 +58,13 @@ exports.getAllClassify = async (req, res) => {
 exports.getClassify = async (req, res) => {
     const sql = `select * from classify where cl_isDel != 1`
     let result = await query(sql)
-    if(result.length > 0) {
+    if (result.length > 0) {
         return res.json({
             code: 0,
             message: '获取分类成功',
             data: result
         })
-    }else {
+    } else {
         return res.json({
             code: 404,
             message: '获取分类失败'
@@ -195,9 +163,9 @@ exports.newPhoto = (req, res) => {
         return res.json({
             code: 200,
             message: '更新头像成功,全局头像将在稍后生效',
-            url:oldFile
+            url: oldFile
         })
-    }catch(err){
+    } catch (err) {
         return res.json({
             code: 404,
             message: '更新头像失败，请稍后重试',
@@ -208,7 +176,7 @@ exports.newPhoto = (req, res) => {
 
 //获取添加文章的数据
 exports.addActive = async (req, res) => {
-    let { datas, content,user} = req.body
+    let { datas, content, user } = req.body
     let { active_title, active_author, file, selx } = datas
     const sql = `insert into active (title,author,content,time,activePhoto,relationActiveSort,issueUser) values('${active_title}','${active_author}','${content}','${minte}','${oldFile}',${selx},'${user}')`
     let result = await query(sql)
@@ -228,14 +196,23 @@ exports.addActive = async (req, res) => {
 
 //获取所有文章数据
 exports.getAllActives = async (req, res) => {
-    let { page, limit } = req.query
+    let { page, limit, search_article_title } = req.query
     //查询当前数据总和
-    const sql1 = `select count(id) as con from active`
+    let sql1 = `select count(id) as con from active where 1 `
+    if (search_article_title) {
+        sql1 += ` and title like '%${search_article_title}%'`
+    }
     let result1 = await query(sql1)
     let count = result1[0].con
     //查询当前页数据
     let offset = (page - 1) * limit
-    const sql = `select a.*,b.cl_name from active as  a inner join classify as b  on a.relationActiveSort = b.cl_id where is_del !=1  order by a.id desc  limit ${offset},${limit} ;`
+    let  sql = `select a.*,b.cl_name from active as  a inner join classify as b  on a.relationActiveSort = b.cl_id where 1 and  is_del !=1 `
+
+    if(search_article_title) {
+        sql += ` and title like '%${search_article_title}%'`
+    }
+
+    sql += `order by a.id desc limit ${offset},${limit}`
     try {
         await query(sql).then(data => {
             return res.json({
@@ -256,11 +233,11 @@ exports.getAllActives = async (req, res) => {
 
 //编辑文章
 exports.updateArtitle = async (req, res) => {
-    let {article_title,article_author,article_classify,activeStatus,content,oldSrc,id} = req.body;
+    let { article_title, article_author, article_classify, activeStatus, content, oldSrc, id } = req.body;
     var oldFile;
     var sql = ''
     let oldSrcs = oldSrc
-    if(req.file) {
+    if (req.file) {
         let files = req.file
         let oldName = files.filename
         let newName = files.originalname
@@ -273,28 +250,28 @@ exports.updateArtitle = async (req, res) => {
         fs.renameSync(oldSrc, newSrc)
         fs.unlinkSync(path.join(__dirname, oldSrcs))
         sql = `update active set title='${article_title}',author='${article_author}',activeStatus='${activeStatus}',content='${content}',activePhoto='${oldFile}',relationActiveSort='${article_classify}' where id=${id}`
-    }else{
+    } else {
         sql = `update active set title='${article_title}',author='${article_author}',activeStatus='${activeStatus}',content='${content}',relationActiveSort='${article_classify}' where id=${id}`
     }
 
-    try{
+    try {
         let result = await query(sql)
-        if(result.affectedRows){
+        if (result.affectedRows) {
             return res.json({
-                code:200,
-                message:'编辑成功'
+                code: 200,
+                message: '编辑成功'
             })
-        }else{
+        } else {
             return res.json({
-                code:404,
-                message:'编辑失败'
+                code: 404,
+                message: '编辑失败'
             })
         }
-    }catch(err){
+    } catch (err) {
         console.log(err);
         return res.json({
-            code:404,
-            message:'编辑失败'
-        }) 
+            code: 404,
+            message: '编辑失败'
+        })
     }
 }

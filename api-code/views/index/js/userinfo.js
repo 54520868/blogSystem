@@ -18,25 +18,29 @@ $(function () {
 
         table.render({
             elem: '#test'
-            , url: '/getUserinfo'/*tpa=https://www.layui.site/test/table/demo1.json*/
+            , url: '/getUserinfo'
             , cols: [[
-                , { field: 'id', title: '编号', fixed: 'left',templet: function (d) {
-                    return d.LAY_INDEX
-                } }
+                , {
+                    field: 'id', title: '编号', fixed: 'left', templet: function (d) {
+                        return d.LAY_INDEX
+                    }
+                }
                 , { field: 'username', title: '用户名', }
                 , { field: 'email', title: '邮箱', }
                 , { field: 'iphone', title: '手机号', }
                 , { field: 'minte', title: '用户注册时间', }
-                , {field: 'is_state', title: '状态', templet: function (d) {
+                , {
+                    field: 'is_state', title: '状态', templet: function (d) {
                         var str = '';
-                        if(d.is_state == 0){
+                        if (d.is_state == 0) {
                             str = '<span style="color:green">正常</span>';
-                        }else {
+                        } else {
                             str = '<span style="color:red">禁用</span>';
                         }
                         return str;
-                    }}
-                ,{ fixed: 'right', title: '操作', toolbar: '#barDemo', }
+                    }
+                }
+                , { fixed: 'right', title: '操作', toolbar: '#barDemo', }
             ]]
             , page: {
                 limit: 10,
@@ -68,6 +72,115 @@ $(function () {
         $('#myButtones').click(function () {
             table.reload('test');
         })
+
+        //监听行工具事件
+        // table.on('tool(test)', function (obj) {
+        //     var data = obj.data;
+        //     if (obj.event === 'del') {
+        //         layer.confirm('是否删除当前文章数据？', function (index) {
+        //             $.ajax({
+        //                 type: 'POST',
+        //                 url: '/deleteAvtive',
+        //                 data: {
+        //                     id: data.id
+        //                 },
+        //                 success: function (res) {
+        //                     if (res.code == 200) {
+        //                         layer.close(layer.index)
+        //                         sussTip('成功', res.message);
+        //                         table.reload('test');
+        //                     } else {
+        //                         errTip('失败', res.message);
+        //                     }
+        //                 }
+        //             })
+        //         });
+        //     } else if (obj.event === 'edit') {
+        //         $('#bbtn').click()
+        //         //初始化分类数据
+        //         let str = '';
+        //         $.get('/getClassify').then(function (res) {
+        //             let newData = res.data
+        //             if (res.code == 0) {
+        //                 newData.forEach(element => {
+        //                     let id = element.cl_id
+        //                     let name = element.cl_name
+        //                     str += `
+        //                                     <option value="${id}">${name}</option>
+        //                                     `
+        //                 });
+        //                 $('#selectpicker').html(` <option value="${data.relationActiveSort}">${data.cl_name}</option>` + str)
+        //                 //动态添加数据之后，重新渲染下拉框
+        //                 form.render('select');
+        //             }
+        //         })
+
+        //         $('#imgs').attr('src', `http://127.0.0.1:7100/router${data.activePhoto}`)
+
+        //         $('#test1').click(function () {
+        //             $('#file').click()
+        //         })
+        //         editor.txt.append(data.content);
+        //         //给表单赋值
+        //         form.val("editForm", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
+        //             "article_title": data.title,
+        //             "article_author": data.author,
+        //             "article_time": data.time,
+        //             "article_issueUser": data.issueUser,
+        //             "activeStatus": data.activeStatus
+        //         });
+
+        //         $('#myButtons').click(function () {
+        //             const formData = new FormData($('#newUserMessage')[0]);
+        //             let editContent = editor.txt.html()
+        //             //追加富文本内容
+        //             formData.append('content', editContent);
+        //             //旧图
+        //             formData.append('oldSrc', data.activePhoto);
+        //             formData.append('id', data.id)
+        //             $.ajax({
+        //                 type: 'POST',
+        //                 url: '/updateArtitle',
+        //                 data: formData,
+        //                 contentType: false,
+        //                 processData: false,
+        //                 dataType: 'json',
+        //                 beforeSend: () => {
+        //                     lightyear.loading('show');  // 显示
+        //                 },
+        //                 success: (data) => {
+        //                     if (data.code === 200) {
+        //                         setTimeout(function () {
+        //                             lightyear.loading('hide');
+        //                         }, 1000)
+        //                         toast.success({
+        //                             title: '成功',
+        //                             message: data.message,
+        //                             position: 'topRight'
+        //                         });
+        //                         $('#btnClose').click()
+        //                         table.reload('test');
+        //                         layer.msg('文章数据获取成功')
+        //                     } else {
+        //                         lightyear.loading('hide');
+        //                         err('失败', data.message);
+        //                     }
+        //                 }
+        //             })
+        //         })
+
+        //     }
+        // });
+
+        form.on('submit(formDemo)', function (data) {
+            let datas = JSON.stringify(data.field);
+            let newDatas = JSON.parse(datas)
+            let { search_user } = newDatas
+            table.reload('test', {
+                where: { search_user }
+            });
+            return false;
+        });
 
     });
 

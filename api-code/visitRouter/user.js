@@ -21,4 +21,7 @@ app.get('/getWebConfig',user.getWebConfig)
 app.post('/updataWebConfig',user.updataWebConfig)
 //修改密码
 app.post('/updataPass',user.updataPass)
+
+//可视化
+app.get('/getVisual',user.getVisual)
 module.exports = app;

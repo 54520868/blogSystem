@@ -1,18 +1,4 @@
 $(function () {
-    //加载弹窗组件
-    var toast;
-    var layer;
-    var element;
-    var loading;
-    layui.use(['toast', 'toast', 'jquery', 'layer', 'code', 'element', 'loading'], function () {
-        toast = layui.toast;
-        layer = layui.layer;
-        var $ = layui.jquery;
-        loading = layui.loading;
-        element = layui.element;
-        layui.code();
-    });
-
     function sussTip(status, mes) {
         try {
             toast.success({
@@ -39,6 +25,29 @@ $(function () {
             // console.log(err);
         }
     }
+    //加载弹窗组件
+    var toast;
+    var layer;
+    var element;
+    var loading;
+    layui.use(['toast', 'jquery', 'layer', 'code', 'element', 'loading', 'tinymce', 'util', 'form', 'upload'], function () {
+        toast = layui.toast;
+        layer = layui.layer;
+        var $ = layui.jquery;
+        form = layui.form;
+        loading = layui.loading;
+        element = layui.element;
+        layui.code();
+        var tinymce = layui.tinymce
+
+        var table = layui.table;
+        var laytpl = layui.laytpl;
+        layui.code();
+
+        
+    })
+
+
 
     function init() {
         let str;
@@ -149,16 +158,16 @@ $(function () {
                         $('#recipient_email').val(data.data[0].author);
                         $('#recipient_iphone').val(data.data[0].content);
                         $('#recipient_deta').val(data.data[0].time);
-                        $('#myButtons').click(()=>{
+                        $('#myButtons').click(() => {
                             if ($('#recipient_username').val() == '' || $('#recipient_email').val() == '' || $('#recipient_iphone').val() == '') {
-                                errTip('失败','编辑信息不能为空')
-                            }else {
+                                errTip('失败', '编辑信息不能为空')
+                            } else {
                                 let datas = $('#newUserMessage').serialize()
                                 $.ajax({
                                     type: 'post',
-                                    url:`/putData`,
+                                    url: `/putData`,
                                     data: `id=${excape}&${datas}`,
-                                    dataType:'json',
+                                    dataType: 'json',
                                     success: (data => {
                                         if (data.code === '404') {
                                             errTip('失败', data.message)
@@ -168,7 +177,7 @@ $(function () {
                                             setTimeout(() => {
                                                 $('#btnClose').click();
                                                 init();
-                                            },2100)
+                                            }, 2100)
                                         }
                                     })
                                 })
