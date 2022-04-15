@@ -2,6 +2,8 @@
 const db = require('../DB/db.js')
 const moment = require('moment');
 const express = require('express');
+const multer = require('multer')
+const upload = multer({ dest: 'router/uploads/' })
 const app = express();
 
 //导入用户登录注册的模块
@@ -18,7 +20,7 @@ app.get('/getInfo',user.getInfo)
 //网站配置
 app.get('/getWebConfig',user.getWebConfig)
 //更新网站配置
-app.post('/updataWebConfig',user.updataWebConfig)
+app.post('/updataWebConfig',upload.single('files'),user.updataWebConfig)
 //修改密码
 app.post('/updataPass',user.updataPass)
 

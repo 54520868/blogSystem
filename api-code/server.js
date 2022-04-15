@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const cors = require('cors');
 // const session = require('express-session');
 //导入解析token的中间件
 const expressJWT = require('express-jwt')
@@ -20,7 +21,7 @@ app.use('/router', express.static('router'))
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
-
+app.use(cors())
 // // session配置项
 // const sessionInitialize = {
 //     name: "session_name", //session的名称 
@@ -57,6 +58,8 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 //设置jwt的鉴权的验证规则 并且设置需要验证的路径
 // app.use(expressJWT({ secret: Retail.jwtSecretKey, algorithms: ['HS256'] }).unless({path:['/login','/login/','/error','/error/','/getInfo']}))
 
+const fnt = require('./visitRouter/fnt.js')
+app.use(fnt)
 
 //挂载的网页
 const aloneH = require('./visitRouter/aloneH.js')

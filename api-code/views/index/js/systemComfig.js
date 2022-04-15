@@ -24,6 +24,9 @@ $(function () {
                 success: (datas) => {
                     if (datas.code == 200) {
                         let item = datas.data[0]
+                        $('#demo1').attr('src', `http://127.0.0.1:7100/router${item.logoImg}`)
+                        $('#demo1').attr('data-src', item.logoImg)
+
                         //获取开关的状态并 转化为布尔值
                         let a = item.openStatus
                         var flag = a === "false" ? false : true;
@@ -44,42 +47,51 @@ $(function () {
         //初始化
         init()
 
-        $('form[name=edit-form]').submit(function () {
+        $('#test1').click(function () {
+            $('#file').click()
+        })
+
+        $('#aev').click(function () {
+            let formData = new FormData($('.layui-form')[0]);
             var web_site_title = $('input[name=web_site_title]').val();
+            let oldWebPhoto = $('#demo1').attr('data-src')
+            formData.append('oldWebPhoto', oldWebPhoto)
             if (web_site_title == '') {
                 errTip('失败', '请填写信息之后在进行提交')
                 return false;
-            }else {
+            } else {
                 var ds = form.val('example');
+                console.log(ds);
                 $.ajax({
                     type: 'POST',
                     url: '/updataWebConfig',
                     dataType: 'json',
-                    data: ds,
+                    data: formData,
+                    contentType: false,
+                    processData: false,
                     beforeSend: () => {
-                        loading.Load(4, "");
-                        loading.loadRemove(1000);
+                        lightyear.loading('show');  // 显示
                     },
                     success: (datas) => {
-                        setTimeout(function () {
-                            if (datas.code == 200) {
-                                sussTip('成功', datas.message)
-                                localStorage.setItem('webComfig',datas.data)
-                                toast.question({
-                                    title: '检测到网站配置更新',
-                                    message: '当前配置已经更新,正在重载网站首页',
-                                    position: 'topRight'
-                                });
-                                setTimeout(function() {
-                                    top.location.href = '/index'
-                                }, 2100);
-                            } else {
-                                errTip('失败', datas.message)
-                                return
-                            }
-                        },800)
+                        console.log(datas);
+                        if (datas.code == 200) {
+                            sussTip('成功', datas.message)
+                            toast.question({
+                                title: '检测到网站配置更新',
+                                message: '当前配置已经更新,正在重载当前页',
+                                position: 'topRight'
+                            });
+                            lightyear.loading('hide');  // 显示
+                            setTimeout(function () {
+                                top.location.href = '/index'
+                            }, 2100);
+                        } else {
+                            lightyear.loading('hide');  // 显示
+                            errTip('失败', datas.message)
+                            return
+                        }
                     }
-                })    
+                })
             }
             return true;
         });
@@ -96,7 +108,6 @@ $(function () {
             });
         }
         catch (err) {
-            // console.log(err);
         }
     }
 
@@ -110,7 +121,6 @@ $(function () {
             });
         }
         catch (err) {
-            // console.log(err);
         }
     }
 

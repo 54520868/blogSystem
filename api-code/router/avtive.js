@@ -159,6 +159,7 @@ exports.newPhoto = (req, res) => {
         let oldSrc = path.join(__dirname, '/uploads', oldName) //当前目录的绝对路径并查到上传的二进制文件名称
         let newSrc = path.join(__dirname, '/uploads', newUrl) //拿到最终要上传的路径和文件的源名称
         oldFile = '/uploads/' + newUrl
+        console.log(oldFile);
         fs.renameSync(oldSrc, newSrc)
         return res.json({
             code: 200,
@@ -273,5 +274,29 @@ exports.updateArtitle = async (req, res) => {
             code: 404,
             message: '编辑失败'
         })
+    }
+}
+
+
+//获取所有审核通过的文章数据
+exports.getAllActivesPass = async (req, res) => {
+    const sql =  `select a.*,b.cl_name from active as  a inner join classify as b  on a.relationActiveSort = b.cl_id where 1 and  is_del !=1 and activeStatus = 1`
+    try {
+        let result = await query(sql)
+        if (result.length) {
+            return res.json({
+                data: result,
+                code: 0,
+                message: '文章数据获取成功'
+            })
+        } else {
+            return res.json({
+                code: 404,
+                message: '文章数据获取失败'
+            })
+        }
+        
+    } catch (err) {
+        console.log(err);
     }
 }

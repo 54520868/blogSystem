@@ -143,7 +143,7 @@ $(function () {
                             position: 'topRight'
                         });
                         setTimeout(function() {
-                            top.location.href = '/index/AddTheArticle'
+                            location.href = '/index/AddTheArticle'
                         },3000)
                     } else {
                         lightyear.loading('hide');  

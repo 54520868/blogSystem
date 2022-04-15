@@ -28,23 +28,37 @@
           </ul>
           <div class="tab-content">
             <div class="tab-pane active">
-              <form class="layui-form"  onsubmit="return false"  method="post"  name="edit-form" class="edit-form"  lay-filter="example">
+              <form class="layui-form" onsubmit="return false" method="post" name="edit-form" class="edit-form"
+                lay-filter="example">
                 <div class="form-group">
                   <label for="web_site_title">后台标题</label>
                   <input class="form-control" type="text" id="web_site_title" name="web_site_title"
                     placeholder="请输入后台标题">
                 </div>
+                <div class="form-group">
+                  <label for="web_site_title">网站首页LOGO</label>
+                  <div class="layui-input-block"  style="margin-left:0" >
+                    <div class="layui-upload">
+                      <div class="layui-upload-list" style="display:inline-block" >
+                        <img class="layui-upload-img"  src="images/aaa.jpg" id="demo1" style="width: 80px;height:80px;border-radius: 50%;">
+                      </div>
+                      <button type="button" style="margin-left: 30px;"  class="btn btn-default btn-w-md" id="test1">更换LOGO</button>
+                      <input type="file" name="files" id="file" style="display: none" onchange="upPhoto(this)" >
+                    </div>
+                  </div>
+                </div>
                 <div class="layui-form-item">
                   <label class="btn-block" for="web_site_status">博客首页站点开关</label>
-                  <div class="layui-input-block" style="margin-left:0" >
+                  <div class="layui-input-block" style="margin-left:0">
                     <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
                       lay-text="ON|OFF">
                   </div>
                 </div>
                 <small class="help-block">站点关闭后博客首页将不能访问，后台可正常登录</small>
                 <div class="layui-form-item">
-                  <div class="layui-input-block"  style="margin-left:0"  >
-                    <button type="submit" class="btn btn-primary m-r-5" lay-submit="" lay-filter="demo1" id="aev" >立即提交</button>
+                  <div class="layui-input-block" style="margin-left:0">
+                    <button type="button" class="btn btn-primary m-r-5" lay-submit="" lay-filter="demo1"
+                      id="aev">立即提交</button>
                   </div>
                 </div>
               </form>
@@ -72,6 +86,16 @@
   <script src="js/bootstrap-notify.min.js"></script>
   <script type="text/javascript" src="js/lightyear.js"></script>
   <script src="js/jwts.js"></script>
+  <script type="text/javascript">
+    function upPhoto(obj) {
+      var file = obj.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function (e) {
+        $('#demo1').attr('src', this.result);
+      }
+    }
+  </script>
   <!--对话框-->
   <script src="js/jconfirm/jquery-confirm.min.js"></script>
   <script src="lib/layui-v2.6.8/layui/layui.js"></script>

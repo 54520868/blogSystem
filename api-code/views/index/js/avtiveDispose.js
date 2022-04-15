@@ -44,159 +44,56 @@ $(function () {
         var laytpl = layui.laytpl;
         layui.code();
 
-        
-    })
-
-
-
-    function init() {
-        let str;
-        $.ajax({
-            type: "GET",
-            url: "/gainActive",
-            dataType: "json",
-            success: (data => {
-                if (data.code === 404) {
-                    errTip('失败', data.message)
-                } else {
-                    sussTip('成功', '文章数据获取成功')
-                    data.data.forEach((item, index) => {
-                        let { id, title, author, content, time } = item
-                        str += `
-                                    <tr>
-                                        <td>${index + 1}</td>
-                                        <td>${title}</td>
-                                        <td>${author}</td>
-                                        <td>${content}</td>
-                                        <td>${time}</td>
-                                        <td><font class="text-success">审核通过</font></td>
-                                        <td>
-                                        <div class="btn-group">
-                                            <a class="btn btn-xs btn-default redact" data = ${id + 817}  href="#!" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
-                                            <a class="btn btn-xs btn-default lookinlook" data = ${id + 817} ="#!" title="查看" data-toggle="tooltip"><i class="mdi mdi-eye"></i></a>
-                                            <a class="btn btn-xs btn-default delData" data = ${id + 817}  href="#!" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
-                                        </div>
-                                        </td>
-                                    </tr>
-                                `
-                    });
-                    $('#tbodys').html(str)
+        table.render({
+            elem: '#test'
+            , url: '/getAllActivesPass'
+            , cols: [[
+                , {
+                    field: 'id', title: '编号', fixed: 'left', templet: function (d) {
+                        return d.LAY_INDEX
+                    }
                 }
-            })
+                , { field: 'title', title: '文章标题', }
+                , { field: 'author', title: '文章作者', }
+                , {
+                    field: '', title: '文章详情', templet: function (d) {
+                        var str = `<div> <button  data-keys='${d.id}' class="btn btn-xs btn-primary" style='font-size:12px!important' >查看文章详情</button>  </div>`;
+                        return str;
+                    }
+                }
+                , {
+                    field: 'activePhoto', title: '文章封面', templet: function (d) {
+                        var str = `<div>  <img src="http://127.0.0.1:7100/router${d.activePhoto}" alt="" width="88" id="oldSrc" > </div>`;
+                        return str;
+                    }
+                }
+                , { field: 'time', title: '发布文章时间', }
+                , { field: 'cl_name', title: '文章所属的分类', }
+                , { field: 'issueUser', title: '文章的发布用户', }
+                , {
+                    field: 'activeStatus', title: '当前文章状态', templet: function (d) {
+                        var str = '';
+                        if (d.activeStatus == 0) {
+                            str = '<span style="color:red">审核失败</span>';
+                        } else if (d.activeStatus == 1) {
+                            str = '<span style="color:green">审核成功</span>';
+                        } else {
+                            str = '<span style="color:#33cabb">待审核</span>';
+                        }
+                        return str;
+                    }
+                }
+                , { fixed: 'right', title: '操作', toolbar: '#barDemo', }
+            ]]
+            , page: {
+                limit: 10,
+            },
+        });
+
+        $('#myButtones').click(function () {
+            table.reload('test');
+            layer.msg('更新文章数据成功')
         })
-    }
-    init()
 
-
-    $('#myButtones').click(function () {
-        init()
     })
-    //删除
-    $('#tbodys').on('click', '.delData', function (eve) {
-        let eveElent = eve.target.parentNode;
-        //获取到属性的值 进行转换
-        let excape = eveElent.getAttribute('data') - 817;
-        eveElent.onclick = function () {
-            $.alert({
-                title: '删除',
-                content: '您确定要删除此用户吗？',
-                buttons: {
-                    confirm: {
-                        text: '确认',
-                        btnClass: 'btn-primary',
-                        action: function () {
-                            $.ajax({
-                                type: 'post',
-                                url: '/deleteAvtive',
-                                dataType: 'json',
-                                data: `id=${excape}`,
-                                success: function (data) {
-                                    if (data.code === '404') {
-                                        errTip('失败', data.message)
-                                    } else {
-                                        sussTip('成功', data.message)
-                                    }
-                                }
-                            })
-                            $.alert('删除成功!');
-                            //删除之后初始化数据
-                            setTimeout(function () {
-                                init();
-                            }, 1500)
-                        }
-                    },
-                    cancel: {
-                        text: '取消',
-                        action: function () {
-                        }
-                    }
-                }
-            });
-        }
-    })
-    //编辑
-    $('#tbodys').on('click', '.redact', function (ee) {
-
-        let eveElent = ee.target.parentNode;
-        //获取到属性的值 进行转换
-        let excape = eveElent.getAttribute('data') - 817;
-        eveElent.onclick = function () {
-            $('#bbtn').click()
-            $('#myModalLabel').html('编辑文章信息')
-            $.ajax({
-                type: 'post',
-                url: '/getActiveOne',
-                data: `id=${excape}`,
-                dataType: 'json',
-                success: (data => {
-                    if (data.code === '404') {
-                        errTip('失败', data.message)
-                        return
-                    } else {
-                        sussTip('成功', data.message)
-                        $('#recipient_username').val(data.data[0].title);
-                        $('#recipient_email').val(data.data[0].author);
-                        $('#recipient_iphone').val(data.data[0].content);
-                        $('#recipient_deta').val(data.data[0].time);
-                        $('#myButtons').click(() => {
-                            if ($('#recipient_username').val() == '' || $('#recipient_email').val() == '' || $('#recipient_iphone').val() == '') {
-                                errTip('失败', '编辑信息不能为空')
-                            } else {
-                                let datas = $('#newUserMessage').serialize()
-                                $.ajax({
-                                    type: 'post',
-                                    url: `/putData`,
-                                    data: `id=${excape}&${datas}`,
-                                    dataType: 'json',
-                                    success: (data => {
-                                        if (data.code === '404') {
-                                            errTip('失败', data.message)
-                                            return
-                                        } else {
-                                            sussTip('成功', data.message)
-                                            setTimeout(() => {
-                                                $('#btnClose').click();
-                                                init();
-                                            }, 2100)
-                                        }
-                                    })
-                                })
-                            }
-                        })
-                    }
-                })
-            })
-        }
-    })
-
-    //查看
-    // $('#tbodys').on('click','.lookinlook', function (e) {
-    //     let eveElent = e.target.parentNode;
-    //     //获取到属性的值 进行转换
-    //     let excape = eveElent.getAttribute('data') - 817;
-    //     eveElent.onclick = function () {
-    //         $('#bbtn').click()
-    //         $('#myModalLabel').html('查看文章')
-    //     }
-    // })
 })

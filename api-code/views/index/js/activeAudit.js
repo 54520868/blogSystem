@@ -72,10 +72,6 @@ $(function () {
                     field: 'activePhoto', title: '文章封面', templet: function (d) {
                         var str = `<div>  <img src="http://127.0.0.1:7100/router${d.activePhoto}" alt="" width="88" id="oldSrc" > </div>`;
                         return str;
-                        // var str = ` <a class="example-image-link" href="http://127.0.0.1:7100/router${d.activePhoto}" data-lightbox="example-set" data-title="Click the right half of the image to move forward.">
-                        //                 <img class="example-image" src="http://127.0.0.1:7100/router${d.activePhoto}" alt="" width='60%' />
-                        //             </a>`
-                        // return str;
                     }
                 }
                 , { field: 'time', title: '发布文章时间', }
@@ -157,7 +153,8 @@ $(function () {
                 $('#test1').click(function () {
                     $('#file').click()
                 })
-                editor.txt.append(data.content);
+                console.log(data);
+              
                 //给表单赋值
                 form.val("editForm", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
                     "article_title": data.title,
@@ -166,6 +163,10 @@ $(function () {
                     "article_issueUser": data.issueUser,
                     "activeStatus": data.activeStatus
                 });
+
+                //先清空当前的内容 在追加 避免重复追加
+                editor.txt.html('');
+                editor.txt.append(data.content);
 
                 $('#myButtons').click(function () {
                     const formData = new FormData($('#newUserMessage')[0]);

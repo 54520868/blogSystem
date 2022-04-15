@@ -34,5 +34,7 @@ app.get('/getAllActives',active.getAllActives)
 //编辑文章数据
 app.post('/updateArtitle',upload.single('file'),active.updateArtitle)
 
+//获取所有审核通过的文章
+app.get('/getAllActivesPass',active.getAllActivesPass)
 
 module.exports = app;

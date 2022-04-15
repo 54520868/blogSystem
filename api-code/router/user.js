@@ -1,7 +1,9 @@
 //导入数据库
 const db = require('../DB/db.js')
 const moment = require('moment');
+const fs = require('fs');
 // const session = require('express-session');
+const path = require('path')
 //导入jwt
 let jwt = require('jsonwebtoken');
 //导入验证的秘钥
@@ -252,22 +254,38 @@ exports.getWebConfig = async (req, res) => {
     })
 }
 
-
 //更新网站配置
-exports.updataWebConfig = (req, res) => {
-    let { web_site_title, open } = req.body;
+exports.updataWebConfig = async  (req, res) => {
+    let { web_site_title, open, oldWebPhoto } = req.body;
+    let file = req.file;
+    let status = false
     let sql = ''
     if (open) {
-        sql = `update webComfig set webTiltle='${web_site_title}',openStatus="true" where id=1`
-    } else {
-        sql = `update webComfig set webTiltle='${web_site_title}' ,openStatus="false" where id=1`
+        status = true
     }
-    query(sql).then(data => {
-        if (data.affectedRows) {
+    if (file) {
+        let files = req.file
+        let oldName = files.filename
+        let newName = files.originalname
+        let str = newName.indexOf('.')
+        let sub = newName.substring(str, newName.length)
+        let newUrl = oldName + sub
+        let oldSrc = path.join(__dirname, '/uploads', oldName) //当前目录的绝对路径并查到上传的二进制文件名称
+        let newSrc = path.join(__dirname, '/uploads', newUrl) //拿到最终要上传的路径和文件的源名称
+        oldFile = '/uploads/' + newUrl
+        fs.renameSync(oldSrc, newSrc)
+        fs.unlinkSync(path.join(__dirname, oldWebPhoto))
+        sql = `update webComfig set webTiltle='${web_site_title}',openStatus="${status ? 'true' : 'false'}",logoImg='${oldFile}' where id=1`
+    }else {
+        sql = `update webComfig set webTiltle='${web_site_title}',openStatus="${status ? 'true' : 'false'}" where id=1`
+    }
+
+    try{
+        let result = await query(sql)
+        if (result.affectedRows) {
             return res.json({
                 code: 200,
                 message: '更新网站配置成功',
-                data: web_site_title
             })
         } else {
             return res.json({
@@ -275,13 +293,14 @@ exports.updataWebConfig = (req, res) => {
                 message: '更新网站配置失败,请稍后在试'
             })
         }
-    }).catch(err => {
-        console.log(err);
+    }catch(err){
         return res.json({
             code: 404,
             message: '更新网站配置失败,请稍后在试'
         })
-    })
+    }
+
+
 }
 
 //可视化
