@@ -3,6 +3,8 @@ const path = require('path');
 const fs = require('fs');
 const cors = require('cors');
 // const session = require('express-session');
+//导入环境变量
+require('dotenv').config()
 //导入解析token的中间件
 const expressJWT = require('express-jwt')
 //导入秘钥

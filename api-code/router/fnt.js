@@ -6,8 +6,6 @@ const moment = require('moment');
 //获取formdata传输过来的数据
 const formidable = require("formidable");
 const query = require('./promises.js')
-//格式化时间
-let minte = moment().format('YYYY-MM-DD-HH:mm:ss')
 
 
 //获取所有审核通过的文章
@@ -37,6 +35,7 @@ exports.getArticleDetails = async (req, res) => {
 
 //当前文章详情
 exports.thisArtice = async (req, res) => {
+    var a = 2
     let { id } = req.query
     const sql = `select a.*,b.cl_name from active a left join classify b on a.relationActiveSort = b.cl_id where a.id = ${id} and is_del != 1 and activeStatus = 1`
     let result = await query(sql)
